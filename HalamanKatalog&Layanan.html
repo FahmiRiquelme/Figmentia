@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog & Layanan - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png" alt="Logo Figmentia">
+        <span>Figmentia</span>
+    </div>
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html" class="active">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>✨ Pilih Layanan Desain Terbaik Anda</h1>
+        <p>Temukan solusi instan, ajukan proyek kustom manual, atau gunakan Asisten AI kami.</p>
+    </div>
+
+    <div class="service-nav">
+        <div class="service-option-card" onclick="showService('ready-made')">
+            <h3><i class="fas fa-box-open"></i> Koleksi Desain Instan</h3>
+            <p>Solusi cepat, siap pakai, dan harga tetap.</p>
+        </div>
+        <div class="service-option-card" onclick="showService('custom-manual')">
+            <h3><i class="fas fa-tools"></i> Desain Kustom Eksklusif</h3>
+            <p>Ajukan penawaran dengan detail manual.</p>
+        </div>
+        <div class="service-option-card ai-partner-highlight" onclick="showService('ai-partner')">
+            <h3><i class="fas fa-robot"></i> Asisten Briefing Pintar</h3>
+            <p>**INOVASI!** Dapatkan draft brief otomatis dalam hitungan detik.</p>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+
+        <div class="content-main">
+
+            <div id="ready-made-section" class="card main-feature-card service-section">
+                <h2>📦 Koleksi Desain Instan</h2>
+                <p class="section-description">Pilihan cepat untuk kebutuhan desain standar seperti template web, logo, dan kartu nama.</p>
+                
+                <div class="catalog-grid">
+                    
+                    <div class="card sub-card service-card" data-id="RMD001" data-name="Template Web E-Commerce" data-price="450000">
+                        <h3>Template Web E-Commerce</h3>
+                        <p class="service-description">Template UI/UX responsif untuk toko online. File Figma/Sketch siap pakai.</p>
+                        <div class="price">Rp 450.000</div>
+                        <button class="btn-primary btn-accent" onclick="addToCart('RMD001')">🛒 Tambah ke Keranjang</button>
+                    </div>
+
+                    <div class="card sub-card service-card" data-id="RMD002" data-name="Logo Minimalis Pack" data-price="250000">
+                        <h3>Logo Minimalis Pack</h3>
+                        <p class="service-description">5 Pilihan logo minimalis profesional, siap edit format vector.</p>
+                        <div class="price">Rp 250.000</div>
+                        <button class="btn-primary btn-accent" onclick="addToCart('RMD002')">🛒 Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="ai-partner-section" class="card main-feature-card custom-service-section service-section">
+                <h2>🤖 Asisten Briefing Pintar (AI Design Partner)</h2>
+                <p class="section-description">Cukup masukkan *keyword* atau deskripsi singkat, AI kami akan menyusun *Design Brief* yang terstruktur dan memberikan rekomendasi layanan.</p>
+                
+                <form id="aiBriefingForm" class="custom-form-layout" onsubmit="submitAiBrief(event)">
+                    
+                    <div class="ai-input-form-group">
+                        <label for="ai_keyword" style="font-weight: 600;"><i class="fas fa-lightbulb"></i> Deskripsikan Proyek Anda (1-2 Kalimat):</label>
+                        <textarea id="ai_keyword" name="ai_keyword" rows="3" placeholder="Contoh: Butuh logo kafe konsep industrial dengan nuansa hangat." required class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-actions" style="margin-bottom: 20px;">
+                        <button type="submit" class="btn-primary" style="padding: 12px 25px;">
+                            <i class="fas fa-robot"></i> Generate Draft Brief Otomatis
+                        </button>
+                    </div>
+                    
+                    <div id="ai-output-area" style="border-top: 2px dashed #ddd; padding-top: 20px; display: none;">
+                        <h3 style="color: green;"><i class="fas fa-check-circle"></i> Draft Brief Berhasil Dibuat!</h3>
+                        <p>Silakan tinjau hasil yang diisi otomatis di bawah. Anda dapat memodifikasi detailnya sebelum mengajukan penawaran.</p>
+                        
+                        <div id="ai-generated-fields">
+                            <div class="form-group">
+                                <label for="ai_kebutuhan">Kebutuhan Desain (Rekomendasi AI):</label>
+                                <input type="text" id="ai_kebutuhan" class="form-control" value="Branding & Identity (Logo, Guideline)">
+                            </div>
+                            <div class="form-group">
+                                <label for="ai_tema">Tema/Gaya Desain (Rekomendasi AI):</label>
+                                <input type="text" id="ai_tema" class="form-control" value="Industrial Modern, Warna Coklat Tua & Abu-abu">
+                            </div>
+                            <div class="form-group">
+                                <label for="ai_detail">Detail Proyek (Draft Awal):</label>
+                                <textarea id="ai_detail" rows="4" class="form-control">Proyek pembuatan logo untuk Kafe dengan konsep Industrial. Target audiens adalah Milenial dan Gen Z. Diperlukan font yang tegas dan minimalis. AI merekomendasikan palet warna hangat.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="ai_anggaran">Estimasi Anggaran Awal (Rekomendasi AI):</label>
+                                <input type="number" id="ai_anggaran" name="anggaran" class="form-control" value="12000000">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-primary" onclick="submitAiToCart()" style="padding: 12px 25px;">
+                                <i class="fas fa-rocket"></i> Ajukan Draft Brief & Lanjutkan
+                            </button>
+                            <button type="button" class="btn-secondary btn-info-harga" onclick="showModal()" style="margin-left: 10px;">
+                                <i class="fas fa-info-circle"></i> Lihat Faktor Harga
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div id="custom-manual-section" class="card main-feature-card custom-service-section service-section">
+                <h2>🛠️ Desain Kustom Eksklusif (Manual)</h2>
+                <p class="section-description">Cocok untuk klien dengan *brief* sangat rinci. Isi detail kebutuhan, tema, dan harga penawaran Anda. Tim kami akan meninjau proposal Anda dan menghubungi Anda.</p>
+                
+                <form id="customProposalForm" class="custom-form-layout" onsubmit="submitProposal(event)">
+                    
+                    <div class="form-group">
+                        <label for="kebutuhan">Kebutuhan Desain:</label>
+                        <select id="kebutuhan" name="kebutuhan" required class="form-control">
+                            <option value="">-- Pilih Jenis Desain --</option>
+                            <option value="UI/UX Aplikasi Mobile">UI/UX Aplikasi Mobile</option>
+                            <option value="UI/UX Website/Dashboard">UI/UX Website/Dashboard</option>
+                            <option value="Branding & Identity">Branding & Identity (Logo, Guideline)</option>
+                            <option value="Ilustrasi Kustom">Jasa Ilustrasi Kustom</option>
+                            <option value="Lainnya">Lainnya (Jelaskan di detail proyek)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tema">Tema/Gaya Desain yang Diinginkan:</label>
+                        <input type="text" id="tema" name="tema" placeholder="Contoh: Minimalis Modern, Dark Mode, Corporate, Vintage" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="anggaran">Harga Penawaran/Anggaran Anda (Minimal Rp 10.000.000):</label>
+                        <input type="number" id="anggaran" name="anggaran" placeholder="Contoh: 10000000" min="10000000" required class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="detail_proyek">Detail Proyek & Deskripsi:</label>
+                        <textarea id="detail_proyek" name="detail_proyek" rows="4" placeholder="Jelaskan secara rinci fitur, jumlah layar, referensi desain, dan kebutuhan lainnya yang Anda inginkan." required class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" style="padding: 12px 25px;">
+                            <i class="fas fa-paper-plane"></i> Ajukan Penawaran Sekarang
+                        </button>
+
+                        <button type="button" class="btn-secondary btn-info-harga" onclick="showModal()" style="margin-left: 10px;">
+                            <i class="fas fa-info-circle"></i> Lihat Faktor Harga
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+
+        <div class="content-side">
+            <div class="cart-summary card main-feature-card">
+                <h4><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h4>
+                <div id="cart-items" class="cart-item-list">
+                    <div class="placeholder-text">Keranjang kosong.</div>
+                </div>
+                
+                <div class="total-price">
+                    <span>Subtotal:</span>
+                    <span id="cart-total">Rp 0</span>
+                </div>
+
+                <button class="btn-primary" id="checkout-button" onclick="checkout()" style="width: 100%;">
+                    <i class="fas fa-credit-card"></i> Lanjut ke Checkout (<span id="cart-count">0</span> Item)
+                </button>
+                <button class="btn-danger" id="clear-cart-button" onclick="clearCart()" style="width: 100%; margin-top: 10px;">
+                    Hapus Semua
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="hargaInfoModal" class="modal">
+    <div class="modal-content card">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>Faktor yang Mempengaruhi Harga Desain Kustom</h2>
+        
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Faktor</th>
+                        <th>Deskripsi</th>
+                        <th>Dampak pada Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Jumlah Layar (Screens)</td><td>Semakin banyak layar yang didesain, semakin besar effort yang dibutuhkan.</td><td>Harga naik seiring jumlah layar.</td></tr>
+                    <tr><td>Kompleksitas Fitur</td><td>Fitur seperti login, dashboard interaktif, animasi, integrasi API menambah tingkat kesulitan.</td><td>Fitur kompleks → harga lebih tinggi.</td></tr>
+                    <tr><td>Tingkat Detail Visual</td><td>Desain minimalis vs desain penuh ilustrasi, animasi, atau efek khusus.</td><td>Detail tinggi → biaya lebih besar.</td></tr>
+                    <tr><td>UX Research & Testing</td><td>Termasuk user persona, wireframe, prototyping, usability testing.</td><td>Jika ada riset mendalam → harga naik signifikan.</td></tr>
+                    <tr><td>Platform Target</td><td>Desain untuk iOS saja, Android saja, atau keduanya sekaligus.</td><td>Multi-platform → harga lebih mahal.</td></tr>
+                    <tr><td>Design System & Dokumentasi</td><td>Pembuatan guideline, style system, dan asset export untuk developer.</td><td>Menambah effort → harga lebih tinggi.</td></tr>
+                    <tr><td>Revisi & Iterasi</td><td>Jumlah revisi yang disepakati dalam kontrak.</td><td>Banyak revisi → biaya bertambah.</td></tr>
+                    <tr><td>Desainer/Agency Level</td><td>Junior freelancer vs senior designer vs agency besar.</td><td>Agency berpengalaman → tarif premium.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    let cart = [];
+    
+    // --- UTILITY FUNCTIONS ---
+    const formatRupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(number);
+    };
+
+    // --- SERVICE SWITCHING LOGIC (New) ---
+    function showService(serviceId) {
+        // Hide all service sections first
+        document.querySelectorAll('.service-section').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Show the selected section
+        const sectionToShow = document.getElementById(`${serviceId}-section`);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
+        }
+    }
+
+    // --- CART LOGIC ---
+    function addToCart(itemId) {
+        const itemElement = document.querySelector(`.service-card[data-id="${itemId}"]`);
+        if (!itemElement) return;
+
+        const itemName = itemElement.dataset.name;
+        const itemPrice = parseInt(itemElement.dataset.price); 
+
+        const existingItem = cart.find(item => item.id === itemId);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ id: itemId, name: itemName, price: itemPrice, quantity: 1 });
+        }
+
+        updateCartDisplay();
+        alert(`${itemName} telah ditambahkan ke keranjang!`);
+    }
+
+    function updateCartDisplay() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalDisplay = document.getElementById('cart-total');
+        const cartCountDisplay = document.getElementById('cart-count');
+        const checkoutButton = document.getElementById('checkout-button');
+        const clearCartButton = document.getElementById('clear-cart-button');
+        
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        let totalItems = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="placeholder-text">Keranjang kosong.</div>';
+            checkoutButton.disabled = true;
+            clearCartButton.disabled = true;
+        } else {
+            checkoutButton.disabled = false;
+            clearCartButton.disabled = false;
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                totalItems += item.quantity;
+                
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item-row');
+                
+                const itemLabel = item.is_proposal ? ' (Pengajuan)' : (item.is_ai ? ' (Draft AI)' : ` (${item.quantity}x)`);
+
+                itemDiv.innerHTML = `
+                    <span class="item-name">${item.name} ${itemLabel}</span>
+                    <span class="item-price">${item.price > 0 ? formatRupiah(subtotal) : 'Rp 0'}</span>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
+
+        cartTotalDisplay.textContent = formatRupiah(total);
+        cartCountDisplay.textContent = totalItems;
+        
+        localStorage.setItem('current_cart', JSON.stringify(cart));
+    }
+    
+    // --- MANUAL CUSTOM LOGIC ---
+    function submitProposal(event) {
+        event.preventDefault(); 
+
+        const form = document.getElementById('customProposalForm');
+        const kebutuhan = form.kebutuhan.value;
+        const tema = form.tema.value;
+        const anggaranValue = Number(form.anggaran.value); 
+        const detail = form.detail_proyek.value;
+
+        if (anggaranValue < 10000000) {
+            alert("Anggaran minimum untuk proyek kustom adalah Rp 10.000.000. Mohon masukkan nilai yang sesuai.");
+            return;
+        }
+        
+        const anggaranDisplay = formatRupiah(anggaranValue).replace('Rp', 'Rp ');
+
+        if (!kebutuhan || !tema || !anggaranValue || !detail) {
+            alert("Mohon lengkapi semua bidang penawaran.");
+            return;
+        }
+
+        const confirmationMessage = 
+            `KONFIRMASI PENAWARAN KUSTOM MANUAL:\n\n` +
+            `Kebutuhan: ${kebutuhan}\n` +
+            `Tema/Gaya: ${tema}\n` +
+            `Anggaran Anda: ${anggaranDisplay}\n` +
+            `Detail Proyek: ${detail.substring(0, 70)}...\n\n` +
+            `Apakah Anda yakin ingin mengajukan penawaran ini ke Admin?`;
+
+        if (confirm(confirmationMessage)) {
+            alert("✅ Penawaran kustom manual Anda telah berhasil diajukan! Admin akan meninjau detailnya dan akan segera menghubungi Anda.");
+            
+            cart.push({ 
+                id: `MANUAL-PROPOSAL-${Date.now()}`, 
+                name: `Penawaran Kustom (Manual): ${kebutuhan}`, 
+                price: 0, 
+                quantity: 1,
+                is_proposal: true,
+                is_ai: false 
+            });
+            updateCartDisplay();
+            form.reset();
+            showService('ready-made'); 
+        }
+    }
+    
+    // --- AI CUSTOM LOGIC ---
+    function submitAiBrief(event) {
+        event.preventDefault();
+        const keyword = document.getElementById('ai_keyword').value;
+        
+        if (!keyword) {
+            alert("Mohon masukkan deskripsi singkat untuk Asisten AI.");
+            return;
+        }
+
+        // SIMULASI PROSES GENERATE AI
+        const outputArea = document.getElementById('ai-output-area');
+        outputArea.style.display = 'block';
+
+        alert(`🤖 AI sedang memproses keyword "${keyword}"... Draft Brief telah berhasil dibuat!`);
+        
+        // Simulasikan scroll ke area output
+        outputArea.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function submitAiToCart() {
+        const kebutuhan = document.getElementById('ai_kebutuhan').value;
+        const anggaranValue = Number(document.getElementById('ai_anggaran').value);
+        const detail = document.getElementById('ai_detail').value;
+
+        const anggaranDisplay = formatRupiah(anggaranValue).replace('Rp', 'Rp ');
+
+        const confirmationMessage = 
+            `KONFIRMASI PENGAJUAN DRAFT AI:\n\n` +
+            `Kebutuhan: ${kebutuhan}\n` +
+            `Anggaran Awal: ${anggaranDisplay}\n` +
+            `Detail Proyek: ${detail.substring(0, 70)}...\n\n` +
+            `Apakah Anda yakin ingin mengajukan draft brief dari AI ini ke Admin?`;
+
+        if (confirm(confirmationMessage)) {
+            alert("✅ Draft Brief dari AI Anda telah berhasil diajukan! Admin akan meninjau detailnya dan segera menghubungi Anda.");
+            
+            cart.push({ 
+                id: `AI-PROPOSAL-${Date.now()}`, 
+                name: `Draft Kustom (AI): ${kebutuhan}`, 
+                price: 0, 
+                quantity: 1,
+                is_proposal: true,
+                is_ai: true 
+            });
+            updateCartDisplay();
+            document.getElementById('aiBriefingForm').reset();
+            document.getElementById('ai-output-area').style.display = 'none'; // Sembunyikan output setelah submit
+            showService('ready-made');
+        }
+    }
+    // --- END AI CUSTOM LOGIC ---
+
+
+    // --- MODAL LOGIC ---
+    function showModal() {
+        document.getElementById('hargaInfoModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('hargaInfoModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('hargaInfoModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // --- CHECKOUT/CART FUNCTIONS ---
+    function checkout() {
+        if (cart.length === 0) {
+            alert("Keranjang belanja Anda masih kosong!");
+            return;
+        }
+        
+        const pendingProposal = cart.some(item => item.is_proposal);
+        if (pendingProposal) {
+            alert("Ada pengajuan penawaran kustom yang harus ditinjau oleh Admin terlebih dahulu. Anda akan diarahkan ke halaman Riwayat Pesanan untuk memantau status penawaran Anda.");
+            window.location.href = 'HalamanRiwayatPesanan.html';
+            return;
+        }
+
+        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        
+        localStorage.setItem('checkout_cart', JSON.stringify(cart));
+        localStorage.setItem('checkout_total', totalPrice);
+
+        alert(`Simulasi Checkout:\nTotal item siap pakai: ${formatRupiah(totalPrice)}.\nLanjut ke halaman Pembayaran...`);
+        
+        window.location.href = 'HalamanPembayaran.html';
+    }
+    
+    function clearCart() {
+        if (confirm("Apakah Anda yakin ingin menghapus semua item dari keranjang?")) {
+            cart = [];
+            updateCartDisplay();
+        }
+    }
+    
+    // --- INITIALIZATION ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const storedCart = localStorage.getItem('current_cart');
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+        }
+        updateCartDisplay();
+        
+        // Default tampilan: Koleksi Desain Instan
+        showService('ready-made'); 
+    });
+</script>
+</body>
+</html>

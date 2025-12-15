@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Akun - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="active profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>👤 Data & Pengaturan Akun</h1>
+        <p>Kelola data diri, kata sandi, dan pantau aktivitas akun Anda.</p>
+    </div>
+
+    <div class="card main-feature-card full-width">
+        
+        <div class="profile-header-card">
+            <div class="profile-picture">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h3>Fahmi Riquelmi</h3>
+                <p>Status Akun: Premium Klien Sejak 2025</p>
+                <p>Terakhir Login: 30 November 2025</p>
+            </div>
+        </div>
+
+        <div class="tab-nav">
+            <button class="active" onclick="openTab(event, 'data-profile')">Data Profil</button>
+            <button onclick="openTab(event, 'activity-log')">Aktivitas Akun</button>
+            <button onclick="openTab(event, 'security')">Keamanan</button>
+        </div>
+
+        <div class="tab-content">
+            
+            <div id="data-profile" class="tab-pane active">
+                <h2>Informasi Dasar</h2>
+                <form id="profileForm" onsubmit="saveProfile(event)">
+                    
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap:</label>
+                        <input type="text" id="nama" name="nama" value="Fahmi Riquelmi" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="fahmi.riquelme@example.com" class="form-control" disabled>
+                        <small style="color: #999;">Email tidak dapat diubah. Hubungi Admin untuk perubahan.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon:</label>
+                        <input type="tel" id="phone" name="phone" value="081234567890" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Alamat:</label>
+                        <textarea id="address" name="address" rows="3" class="form-control">Jl. Digital No. 25, Tangerang Selatan</textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 15px;">
+                        <i class="fas fa-save"></i> Simpan Perubahan
+                    </button>
+                </form>
+            </div>
+
+            <div id="activity-log" class="tab-pane">
+                <h2>Log Aktivitas Terkini</h2>
+                
+                <div id="activityLogContainer">
+                    <div class="activity-item login">
+                        <div class="activity-details">
+                            <p><strong>Login Berhasil</strong> dari perangkat Desktop (Chrome). IP: 103.23.100.12</p>
+                            <span class="timestamp">30 November 2025, 08:30 WIB</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-item transaction">
+                        <div class="activity-details">
+                            <p><strong>Pembayaran Sukses</strong> untuk Invoice <span style="font-weight: bold;">INV007</span> (Rp 450.000).</p>
+                            <span class="timestamp">28 November 2025, 14:45 WIB</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item order">
+                        <div class="activity-details">
+                            <p><strong>Pesanan Baru Dibuat:</strong> Logo Minimalis Pack.</p>
+                            <span class="timestamp">28 November 2025, 14:30 WIB</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item login">
+                        <div class="activity-details">
+                            <p><strong>Login Berhasil</strong> dari perangkat Mobile (Android).</p>
+                            <span class="timestamp">27 November 2025, 20:10 WIB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="security" class="tab-pane">
+                <h2>Pengaturan Keamanan</h2>
+                <form id="securityForm" onsubmit="changePassword(event)">
+                    
+                    <div class="form-group">
+                        <label for="oldPassword">Kata Sandi Lama:</label>
+                        <input type="password" id="oldPassword" name="oldPassword" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">Kata Sandi Baru:</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Konfirmasi Kata Sandi Baru:</label>
+                        <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-danger" style="margin-top: 15px;">
+                        <i class="fas fa-key"></i> Ubah Kata Sandi
+                    </button>
+
+                    <h4 style="margin-top: 30px;">Verifikasi Dua Langkah (2FA)</h4>
+                    <p style="color: #666;">Status: <span style="color: #e74c3c; font-weight: bold;">Non-Aktif</span></p>
+                    <button type="button" class="btn-secondary">Aktifkan 2FA</button>
+                    
+                </form>
+            </div>
+            
+        </div> </div> </div>
+
+<script>
+    // --- FUNGSI TAB NAVIGASI ---
+    function openTab(evt, tabName) {
+        // Hapus class 'active' dari semua tab-pane
+        const tabContent = document.querySelectorAll('.tab-pane');
+        tabContent.forEach(pane => {
+            pane.classList.remove('active');
+        });
+
+        // Hapus class 'active' dari semua tombol tab
+        const tabLinks = document.querySelectorAll('.tab-nav button');
+        tabLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+
+        // Tampilkan tab yang dipilih
+        document.getElementById(tabName).classList.add('active');
+        // Tandai tombol yang diklik sebagai 'active'
+        evt.currentTarget.classList.add('active');
+    }
+
+    // --- FUNGSI SIMPAN PROFIL (Simulasi) ---
+    function saveProfile(event) {
+        event.preventDefault();
+        const nama = document.getElementById('nama').value;
+        const phone = document.getElementById('phone').value;
+        
+        alert(`✅ Data profil berhasil disimpan!\nNama: ${nama}\nTelepon: ${phone}`);
+    }
+
+    // --- FUNGSI UBAH KATA SANDI (Simulasi) ---
+    function changePassword(event) {
+        event.preventDefault();
+        const oldPass = document.getElementById('oldPassword').value;
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmNewPassword').value;
+
+        if (newPass.length < 6) {
+            alert("Kata sandi baru minimal harus 6 karakter.");
+            return;
+        }
+        
+        if (newPass !== confirmPass) {
+            alert("Konfirmasi kata sandi baru tidak cocok.");
+            return;
+        }
+        
+        // Simulasi validasi kata sandi lama
+        // Dalam aplikasi nyata, ini akan divalidasi di server
+        if (oldPass.length > 0) { 
+             alert("✅ Kata sandi berhasil diubah! Anda akan dialihkan ke halaman login. (Simulasi)");
+             document.getElementById('securityForm').reset();
+        } else {
+             alert("❌ Kata sandi lama salah atau kosong. Mohon coba lagi.");
+        }
+    }
+
+</script>
+</body>
+</html>

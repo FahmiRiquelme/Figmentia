@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png" alt="Logo Figmentia">
+        <span>Figmentia</span>
+    </div>
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html" class="active">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>💳 Lanjut ke Pembayaran</h1>
+        <p>Tinjau detail pesanan Anda dan pilih metode pembayaran.</p>
+    </div>
+
+    <div class="checkout-layout">
+        
+        <div class="checkout-details">
+            
+            <div class="card main-feature-card">
+                <h2>1. Detail Pesanan Anda</h2>
+                <div class="order-list">
+                    <div id="order-items-list">
+                        <div class="placeholder-text">Memuat item dari keranjang...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card main-feature-card">
+                <h2>2. Pilih Metode Pembayaran</h2>
+                
+                <div class="payment-methods-grid">
+                    <div class="payment-option selected" data-method="bca" onclick="selectPayment('bca')">
+                        <i class="fas fa-university"></i> BCA Virtual Account
+                    </div>
+                    <div class="payment-option" data-method="mandiri" onclick="selectPayment('mandiri')">
+                        <i class="fas fa-university"></i> Mandiri Transfer
+                    </div>
+                    <div class="payment-option" data-method="gopay" onclick="selectPayment('gopay')">
+                        <i class="fas fa-qrcode"></i> QRIS / E-Wallet
+                    </div>
+                    <div class="payment-option" data-method="card" onclick="selectPayment('card')">
+                        <i class="fas fa-credit-card"></i> Kartu Kredit/Debit
+                    </div>
+                </div>
+                
+                <p class="section-description" style="margin-top: 20px; font-size: 14px;">Pembayaran aman dan terenkripsi melalui Midtrans.</p>
+            </div>
+            
+        </div>
+
+        <div class="checkout-summary card main-feature-card">
+            <h2>Ringkasan Pembayaran</h2>
+            
+            <div class="summary-line">
+                <span>Total Belanja Item:</span>
+                <span id="summary-subtotal">Rp 0</span>
+            </div>
+            
+            <div class="summary-line tax-fee">
+                <span>Biaya Layanan (2%):</span>
+                <span id="summary-fee">Rp 0</span>
+            </div>
+            
+            <div class="summary-line total">
+                <span>TOTAL AKHIR:</span>
+                <span id="summary-total">Rp 0</span>
+            </div>
+            
+            <button class="btn-primary btn-accent" id="checkout-payment-button" onclick="processPayment()">
+                <i class="fas fa-lock"></i> Bayar Sekarang
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const SERVICE_FEE_PERCENTAGE = 0.02; // 2%
+    let selectedMethod = 'bca'; // Default
+
+    // Format mata uang Rupiah
+    const formatRupiah = (number) => {
+        if (isNaN(number) || number === null) return 'Rp 0';
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(number);
+    };
+
+    function selectPayment(method) {
+        selectedMethod = method;
+        document.querySelectorAll('.payment-option').forEach(el => {
+            el.classList.remove('selected');
+        });
+        document.querySelector(`.payment-option[data-method="${method}"]`).classList.add('selected');
+    }
+
+    function calculateAndDisplaySummary(cart, subtotal) {
+        const fee = Math.round(subtotal * SERVICE_FEE_PERCENTAGE);
+        const finalTotal = subtotal + fee;
+
+        document.getElementById('summary-subtotal').textContent = formatRupiah(subtotal);
+        document.getElementById('summary-fee').textContent = formatRupiah(fee);
+        document.getElementById('summary-total').textContent = formatRupiah(finalTotal);
+        
+        // Simpan total akhir ke localStorage (untuk halaman sukses)
+        localStorage.setItem('final_checkout_total', finalTotal);
+    }
+
+    function loadOrderDetails() {
+        const cartJSON = localStorage.getItem('checkout_cart');
+        const subtotal = parseInt(localStorage.getItem('checkout_total') || 0);
+        const orderList = document.getElementById('order-items-list');
+        
+        orderList.innerHTML = '';
+
+        if (!cartJSON || subtotal === 0) {
+            orderList.innerHTML = '<div class="placeholder-text" style="color: #dc3545;">❌ Error: Keranjang kosong atau data hilang.</div>';
+            document.getElementById('checkout-payment-button').disabled = true;
+            return;
+        }
+
+        const cart = JSON.parse(cartJSON);
+        
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('order-list-item');
+            
+            const subItemTotal = item.price * item.quantity;
+            
+            itemDiv.innerHTML = `
+                <span class="item-name-checkout">${item.name} (${item.quantity}x)</span>
+                <span class="item-price-checkout">${formatRupiah(subItemTotal)}</span>
+            `;
+            orderList.appendChild(itemDiv);
+        });
+
+        calculateAndDisplaySummary(cart, subtotal);
+    }
+    
+    function processPayment() {
+        if (!selectedMethod) {
+            alert('Mohon pilih metode pembayaran.');
+            return;
+        }
+        
+        const finalTotal = localStorage.getItem('final_checkout_total');
+        
+        if (confirm(`Anda akan melakukan pembayaran sebesar ${formatRupiah(parseInt(finalTotal))} menggunakan ${selectedMethod.toUpperCase()}. Lanjutkan?`)) {
+            // Simulasi proses pembayaran sukses
+            localStorage.removeItem('current_cart'); // Kosongkan keranjang setelah checkout
+            
+            // Redirect ke halaman sukses
+            window.location.href = 'HalamanPembayaranSucces.html';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrderDetails);
+</script>
+</body>
+</html>

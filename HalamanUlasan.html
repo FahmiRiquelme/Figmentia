@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umpan Balik - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html" class="active">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>⭐ Berikan Umpan Balik Anda</h1>
+        <p>Bantu kami meningkatkan kualitas layanan dengan memberikan rating dan ulasan jujur untuk pesanan Anda.</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content-main full-width">
+            <div class="card main-feature-card">
+                <h2>Formulir Ulasan Layanan</h2>
+                
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    
+                    <div class="form-group">
+                        <label for="orderId">Pilih Pesanan yang Akan Diulas:</label>
+                        <select id="orderId" name="orderId" required class="form-control">
+                            <option value="">-- Pilih ID Pesanan Selesai --</option>
+                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Penilaian Kualitas Layanan:</label>
+                        <div class="rating-area">
+                            <div class="rating-stars" id="ratingStars">
+                                </div>
+                            <input type="hidden" id="ratingValue" name="ratingValue" required value="0">
+                            <div class="rating-label" id="ratingLabel">Pilih rating Anda (0 Bintang)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackText">Komentar dan Saran (Maks. 500 karakter):</label>
+                        <textarea id="feedbackText" name="feedbackText" rows="5" maxlength="500" placeholder="Berikan komentar mendetail mengenai pengalaman Anda (kualitas desain, kecepatan respon, dll)." required class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="padding: 12px 25px; margin-top: 20px;">
+                        <i class="fas fa-paper-plane"></i> Kirim Umpan Balik
+                    </button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Data dummy simulasi pesanan yang sudah selesai (ready for feedback)
+    const completedOrders = [
+        { id: 'INV001', name: 'Template Web E-Commerce', date: '2025-11-20' },
+        { id: 'INV003', name: 'Logo Minimalis Pack', date: '2025-11-26' },
+        { id: 'INV005', name: 'UI/UX Aplikasi Mobile (Kustom)', date: '2025-12-01' },
+    ];
+
+    // --- FUNGSI RATING BINTANG ---
+    let currentRating = 0;
+    const ratingLabelMap = {
+        1: "Sangat Buruk (1 Bintang)",
+        2: "Buruk (2 Bintang)",
+        3: "Cukup Baik (3 Bintang)",
+        4: "Baik Sekali (4 Bintang)",
+        5: "Sempurna (5 Bintang)"
+    };
+
+    function renderStars() {
+        const starContainer = document.getElementById('ratingStars');
+        starContainer.innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            const star = document.createElement('i');
+            star.classList.add('fas', 'fa-star');
+            star.setAttribute('data-rating', i);
+            if (i <= currentRating) {
+                star.classList.add('rated');
+            }
+            star.addEventListener('mouseover', highlightStars);
+            star.addEventListener('mouseout', resetStars);
+            star.addEventListener('click', setRating);
+            starContainer.appendChild(star);
+        }
+        updateRatingLabel(currentRating);
+    }
+
+    function highlightStars(event) {
+        const rating = parseInt(event.target.dataset.rating);
+        document.querySelectorAll('.rating-stars .fa-star').forEach(star => {
+            if (parseInt(star.dataset.rating) <= rating) {
+                star.classList.add('rated');
+            } else {
+                star.classList.remove('rated');
+            }
+        });
+        updateRatingLabel(rating);
+    }
+
+    function resetStars() {
+        document.querySelectorAll('.rating-stars .fa-star').forEach(star => {
+            if (parseInt(star.dataset.rating) > currentRating) {
+                star.classList.remove('rated');
+            }
+        });
+        updateRatingLabel(currentRating);
+    }
+
+    function setRating(event) {
+        currentRating = parseInt(event.target.dataset.rating);
+        document.getElementById('ratingValue').value = currentRating;
+        renderStars(); // Render ulang untuk mengunci status rated
+    }
+
+    function updateRatingLabel(rating) {
+        const label = document.getElementById('ratingLabel');
+        if (rating === 0) {
+             label.textContent = "Pilih rating Anda (0 Bintang)";
+        } else {
+             label.textContent = ratingLabelMap[rating];
+        }
+    }
+
+
+    // --- FUNGSI FORM ---
+    
+    function populateOrderSelect() {
+        const select = document.getElementById('orderId');
+        completedOrders.forEach(order => {
+            const option = document.createElement('option');
+            option.value = order.id;
+            option.textContent = `${order.id} - ${order.name} (Selesai ${order.date})`;
+            select.appendChild(option);
+        });
+    }
+
+    function submitFeedback(event) {
+        event.preventDefault();
+        
+        const form = document.getElementById('feedbackForm');
+        const orderId = form.orderId.value;
+        const rating = parseInt(form.ratingValue.value);
+        const feedbackText = form.feedbackText.value;
+
+        if (rating === 0) {
+            alert("Mohon berikan rating bintang minimal 1 sebelum mengirimkan umpan balik.");
+            return;
+        }
+
+        const selectedOrder = completedOrders.find(o => o.id === orderId);
+        
+        const confirmationMessage = 
+            `Anda yakin ingin mengirimkan umpan balik ini?\n\n` +
+            `Pesanan: ${selectedOrder.name}\n` +
+            `Rating: ${rating} Bintang (${ratingLabelMap[rating]})\n` +
+            `Komentar: "${feedbackText.substring(0, 50)}..."`;
+
+        if (confirm(confirmationMessage)) {
+            // Logika pengiriman data simulasi
+            console.log("DATA UMPAN BALIK DIKIRIM:", {
+                orderId: orderId,
+                orderName: selectedOrder.name,
+                rating: rating,
+                feedbackText: feedbackText,
+                timestamp: new Date().toISOString()
+            });
+
+            alert(`✅ Terima kasih! Umpan balik untuk pesanan ${orderId} (${rating} Bintang) berhasil dikirimkan.`);
+            
+            // Reset form setelah sukses
+            form.reset();
+            currentRating = 0;
+            renderStars();
+        }
+    }
+
+    // Panggil fungsi inisialisasi saat DOM selesai dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+        populateOrderSelect();
+        renderStars();
+    });
+</script>
+</body>
+</html>

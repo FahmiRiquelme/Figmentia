@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Pembelian - Figmentia</title>
+    <link rel="icon" href="Gambar/Logo2.png" type="image/png">
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Gambar/Logo2.png"> Figmentia 
+        </div>
+        <div class="user-info">
+            <div class="profile-dropdown" onclick="toggleDropdown()">
+                <i class="fas fa-user-circle"></i>
+                <span>Fahmi Riquelmi (Coustmer)</span>
+                
+                <div id="profileDropdown" class="dropdown-content">
+                    <a href="HalamanProfile.html"><i class="fas fa-id-card"></i> Lihat Profil</a>
+                    <a href="Halamlogin.html" role="button"><i class="fas fa-sign-out-alt"></i> Logout</a> 
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="HalamanPortofolio.html"><i class="fas fa-images"></i> Portofolio</a></li>
+            <li class="active"><a href="HalamanKatalog&Layanan.html"><i class="fas fa-puzzle-piece"></i> Katalog & Layanan</a></li>
+            <li><a href="HalamanRiwayatPesanan.html"><i class="fas fa-history"></i> Riwayat Pesanan</a></li>
+            <li><a href="HalamanUlasan.html"><i class="fas fa-star"></i> Umpan Balik</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h2 class="page-title"><i class="fas fa-shopping-cart"></i> Proses Checkout</h2>
+        <p class="page-subtitle">Verifikasi pesanan Anda dan masukkan detail pengiriman.</p>
+
+        <div class="checkout-grid">
+            <div class="card checkout-details">
+                <h3><i class="fas fa-map-marker-alt"></i> Data Pembeli & Pengiriman</h3>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="penerima">Nama Lengkap Penerima:</label>
+                        <input type="text" id="penerima" name="penerima" value="Nama Lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Pengiriman File:</label>
+                        <input type="email" id="email" name="email" value="masukan Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="metode_bayar">Metode Pembayaran:</label>
+                        <select id="metode_bayar" name="metode_bayar" required>
+                            <option value="transfer">Transfer Bank (BCA/Mandiri)</option>
+                            <option value="dana">E-Wallet (Dana/Gopay)</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card order-summary">
+                <h3><i class="fas fa-receipt"></i> Ringkasan Pesanan</h3>
+                <div class="summary-item">
+                    <span>Produk:</span>
+                    <span id="product-name">...</span>
+                </div>
+                <div class="summary-item">
+                    <span>Harga Satuan:</span>
+                    <span id="product-price">...</span>
+                </div>
+                <hr>
+                <div class="summary-item total-item">
+                    <strong>Total Pembayaran:</strong>
+                    <strong id="total-price" style="color: #FF00FF;">...</strong>
+                </div>
+
+                <button class="submit-btn" onclick="processPayment()">
+                    <i class="fas fa-lock"></i> Lanjutkan Pembayaran
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Ambil data dari URL (simulasi)
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('product') || 'Template Landing Page "Nova"';
+        const price = urlParams.get('price') || '350000';
+
+        // Tampilkan detail produk
+        document.getElementById('product-name').textContent = productName.replace(/^\w/, c => c.toUpperCase()).replace(/([A-Z])/g, ' $1');
+        document.getElementById('product-price').textContent = 'Rp ' + parseFloat(price).toLocaleString('id-ID');
+        document.getElementById('total-price').textContent = 'Rp ' + parseFloat(price).toLocaleString('id-ID');
+
+        // Fungsi Simulasi Pembayaran
+        function processPayment() {
+            const form = document.getElementById('checkoutForm');
+            if (form.checkValidity()) {
+                // Simulasi pemrosesan 2 detik
+                alert("Memproses pesanan. Anda akan diarahkan ke halaman sukses.");
+                setTimeout(() => {
+                    // Redirect ke halaman sukses
+                    window.location.href = 'HalamanPembayaranSukses.html?orderId=FIG00127';
+                }, 1000); 
+            } else {
+                alert("Mohon lengkapi semua data wajib.");
+                form.reportValidity();
+            }
+        }
+        
+        // Fungsi untuk toggle dropdown profil di header
+        function toggleDropdown() {
+            document.getElementById("profileDropdown").classList.toggle("show");
+        }
+
+        // Fungsi untuk mobile toggle sidebar
+        function toggleSidebar() {
+             var sidebar = document.getElementById('sidebar');
+             sidebar.classList.toggle('open');
+        }
+
+        // Tutup dropdown jika user mengklik di luar
+        window.onclick = function(event) {
+            if (!event.target.closest('.profile-dropdown')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

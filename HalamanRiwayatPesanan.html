@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pesanan - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html" class="active">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>📜 Riwayat Pesanan & Status Kustom</h1>
+        <p>Lihat semua riwayat transaksi dan pantau perkembangan pengajuan penawaran kustom Anda.</p>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <div class="content-main full-width">
+            
+            <div class="card main-feature-card">
+                <h2>Daftar Pesanan Saya</h2>
+                
+                <div class="table-responsive">
+                    <table class="data-table history-table">
+                        <thead>
+                            <tr>
+                                <th>ID Transaksi</th>
+                                <th>Tipe</th>
+                                <th>Nama Layanan</th>
+                                <th>Total Harga</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderHistoryBody">
+                            </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="chatModal" class="modal chat-window">
+    <div class="modal-content card chat-container">
+        <div class="chat-header">
+            <h4><i class="fas fa-headset"></i> Layanan Bantuan Figmentia</h4>
+            <span class="close-button" onclick="closeChatModal()">&times;</span>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message admin-message">
+                Selamat datang, ada yang bisa kami bantu? (Figmentia Admin)
+                <span class="timestamp">11:35 PM</span>
+            </div>
+            <div class="message user-message">
+                Saya ingin bertanya tentang status pesanan saya.
+                <span class="timestamp">11:36 PM</span>
+            </div>
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ketik pesan Anda di sini..." class="form-control" onkeypress="handleChatEnter(event)">
+            <button class="btn-primary" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+<div id="invoiceModal" class="modal invoice-window">
+    <div class="modal-content card invoice-container" id="invoiceContent">
+        <div class="invoice-header">
+            <span class="close-button" onclick="closeInvoiceModal()">&times;</span>
+        </div>
+        
+        <div class="invoice-body" id="invoiceTemplate">
+            </div>
+        
+        <div class="invoice-actions">
+            <button class="btn-primary" onclick="downloadInvoice('INV001')"><i class="fas fa-file-pdf"></i> Unduh PDF</button>
+        </div>
+    </div>
+</div>
+<script>
+    // Data dummy riwayat pesanan (Simulasi)
+    // Untuk menguji, Anda bisa menambahkan beberapa data
+    const orderHistory = [
+        {
+            id: 'INV001',
+            type: 'Ready-made',
+            name: 'Template Web E-Commerce',
+            price: 450000,
+            quantity: 1,
+            date: '2025-11-20',
+            status: 'Selesai',
+            is_proposal: false
+        },
+        {
+            id: 'INV002',
+            type: 'Custom Proposal',
+            name: 'UI/UX Aplikasi Mobile',
+            price: 0,
+            quantity: 1,
+            date: '2025-11-25',
+            status: 'Menunggu Review Admin',
+            is_proposal: true,
+            proposal_details: 'Tema: Dark Mode. Anggaran: 12.000.000'
+        },
+        {
+            id: 'INV003',
+            type: 'Ready-made',
+            name: 'Logo Minimalis Pack (2x)',
+            price: 500000,
+            quantity: 1,
+            date: '2025-11-26',
+            status: 'Pembayaran Diterima',
+            is_proposal: false
+        },
+        {
+            id: 'INV004',
+            type: 'Custom Proposal',
+            name: 'Branding & Identity',
+            price: 0,
+            quantity: 1,
+            date: '2025-11-28',
+            status: 'Penawaran Ditolak',
+            is_proposal: true,
+            proposal_details: 'Anggaran terlalu rendah. Silakan ajukan ulang.'
+        },
+    ];
+
+    // Format mata uang Rupiah
+    const formatRupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(number);
+    };
+
+    // Fungsi untuk mendapatkan tag status berdasarkan teks
+    function getStatusTag(status) {
+        let className = 'status-badge ';
+        if (status === 'Selesai') {
+            className += 'status-success';
+        } else if (status === 'Menunggu Review Admin') {
+            className += 'status-pending';
+        } else if (status === 'Pembayaran Diterima') {
+            className += 'status-progress';
+        } else if (status === 'Penawaran Ditolak') {
+            className += 'status-danger';
+        } else {
+             className += 'status-info';
+        }
+        return `<span class="${className}">${status}</span>`;
+    }
+
+    // Fungsi untuk menampilkan riwayat pesanan
+    function displayOrderHistory() {
+        const body = document.getElementById('orderHistoryBody');
+        body.innerHTML = '';
+
+        orderHistory.forEach(order => {
+            const row = body.insertRow();
+            
+            // Kolom 1: ID
+            row.insertCell().textContent = order.id;
+            
+            // Kolom 2: Tipe
+            row.insertCell().textContent = order.type;
+            
+            // Kolom 3: Nama Layanan
+            row.insertCell().textContent = order.name;
+            
+            // Kolom 4: Total Harga
+            const priceCell = row.insertCell();
+            if (order.price > 0) {
+                 priceCell.textContent = formatRupiah(order.price * order.quantity);
+            } else {
+                 priceCell.innerHTML = '<span class="text-muted">N/A (Proposal)</span>';
+            }
+
+            // Kolom 5: Tanggal
+            row.insertCell().textContent = order.date;
+            
+            // Kolom 6: Status
+            row.insertCell().innerHTML = getStatusTag(order.status);
+            
+            // Kolom 7: Aksi
+            const actionCell = row.insertCell();
+            if (order.is_proposal) {
+                // Untuk Proposal
+                if (order.status === 'Menunggu Review Admin') {
+                    actionCell.innerHTML = `<button class="btn-sm btn-info" onclick="viewDetails('${order.id}', '${order.proposal_details}')"><i class="fas fa-eye"></i> Detail</button>`;
+                } else if (order.status === 'Penawaran Ditolak') {
+                    actionCell.innerHTML = `<button class="btn-sm btn-danger" onclick="viewDetails('${order.id}', '${order.proposal_details}')"><i class="fas fa-exclamation-triangle"></i> Review</button>`;
+                } else {
+                    actionCell.innerHTML = `<button class="btn-sm btn-primary" onclick="viewDetails('${order.id}', '${order.proposal_details}')"><i class="fas fa-download"></i> Final Project</button>`;
+                }
+            } else {
+                // Untuk Ready-made
+                actionCell.innerHTML = `<button class="btn-sm btn-primary" onclick="downloadFile('${order.id}')"><i class="fas fa-download"></i> Unduh</button>`;
+            }
+        });
+    }
+
+    // Fungsi Aksi Simulasi
+    function viewDetails(orderId, details) {
+        alert(`Detail Penawaran Kustom ${orderId}:\n\n${details}`);
+    }
+
+    function downloadFile(orderId) {
+        alert(`Simulasi: File untuk pesanan ${orderId} sedang dipersiapkan dan diunduh.`);
+    }
+
+    // ================== FUNGSI CHAT ADMIN (Dari halaman Katalog) ==================
+    // Salin dan tambahkan semua fungsi chat di sini (showChatModal, closeChatModal, sendMessage, handleChatEnter)
+
+    function showChatModal() {
+        document.getElementById('chatModal').style.display = 'block';
+        const messagesContainer = document.getElementById('chatMessages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function closeChatModal() {
+        document.getElementById('chatModal').style.display = 'none';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const messageText = input.value.trim();
+        
+        if (messageText === "") {
+            return;
+        }
+        
+        const messagesContainer = document.getElementById('chatMessages');
+        const now = new Date();
+        const timestamp = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('message', 'user-message');
+        userMessageDiv.innerHTML = `${messageText}<span class="timestamp">${timestamp}</span>`;
+        messagesContainer.appendChild(userMessageDiv);
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        input.value = '';
+
+        setTimeout(() => {
+            const adminResponse = `Baik, Admin telah menerima pesan Anda: "${messageText}". Kami akan segera memprosesnya.`;
+            const replyTime = new Date();
+            const replyTimestamp = replyTime.getHours().toString().padStart(2, '0') + ':' + replyTime.getMinutes().toString().padStart(2, '0');
+
+            const adminMessageDiv = document.createElement('div');
+            adminMessageDiv.classList.add('message', 'admin-message');
+            adminMessageDiv.innerHTML = `${adminResponse}<span class="timestamp">${replyTimestamp}</span>`;
+            messagesContainer.appendChild(adminMessageDiv);
+            
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000);
+    }
+
+    function handleChatEnter(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+    // ==============================================================================
+
+    // Panggil fungsi display saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', displayOrderHistory);
+
+    // ... [Kode Skrip yang sudah ada] ...
+
+// Fungsi untuk membuat template nota HTML
+function generateInvoiceHtml(order) {
+    const totalHarga = formatRupiah(order.price * order.quantity);
+
+    return `
+        <div class="nota-header">
+            <img src="Gambar/Logo2.png" alt="Figmentia Logo" style="width: 50px; margin-bottom: 10px;">
+            <h2>NOTA PEMBAYARAN - ${order.id}</h2>
+        </div>
+        
+        <div class="nota-info">
+            <div>
+                <strong>INFORMASI PELANGGAN</strong>
+                Nama: Fahmi Riquelmi (Simulasi)<br>
+                Email: user@example.com (Simulasi)<br>
+                Tanggal Pesan: ${order.date}
+            </div>
+            <div>
+                <strong>INFORMASI PERUSAHAAN</strong>
+                Jl. Digital No. 123<br>
+                info@figmentia.com<br>
+            </div>
+        </div>
+
+        <div class="nota-items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Layanan</th>
+                        <th>Tipe</th>
+                        <th>Harga Satuan</th>
+                        <th>Jumlah</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${order.name}</td>
+                        <td>${order.type}</td>
+                        <td>${formatRupiah(order.price)}</td>
+                        <td>${order.quantity}</td>
+                        <td>${totalHarga}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: right;">
+            <p><strong>TOTAL HARGA: ${totalHarga}</strong></p>
+            <span class="status-badge status-success" style="padding: 5px 10px; border-radius: 4px;">LUNAS</span>
+            <p style="margin-top: 20px;">Hormat Kami,<br>Figmentia</p>
+        </div>
+    `;
+}
+
+// Fungsi untuk menampilkan modal nota
+function showInvoiceModal(orderId) {
+    const order = orderHistory.find(o => o.id === orderId);
+    if (!order) {
+        alert("Data pesanan tidak ditemukan.");
+        return;
+    }
+    
+    document.getElementById('invoiceTemplate').innerHTML = generateInvoiceHtml(order);
+    document.getElementById('invoiceModal').style.display = 'block';
+}
+
+// Fungsi untuk menutup modal nota
+function closeInvoiceModal() {
+    document.getElementById('invoiceModal').style.display = 'none';
+}
+
+// Fungsi utama untuk mengunduh PDF
+window.jsPDF = window.jspdf.jsPDF; // Definisikan ulang jspdf
+
+function downloadInvoice(orderId) {
+    const input = document.getElementById('invoiceTemplate');
+    const filename = `Nota_Pembayaran_${orderId}.pdf`;
+
+    // Sembunyikan tombol aksi saat membuat gambar (agar tidak ikut di PDF)
+    const actions = document.querySelector('.invoice-actions');
+    actions.style.display = 'none';
+
+    html2canvas(input, { scale: 3 }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save(filename);
+
+        // Tampilkan kembali tombol aksi
+        actions.style.display = 'block';
+        
+        // Tutup modal setelah mengunduh
+        closeInvoiceModal();
+    }).catch(error => {
+         console.error("Error saat membuat PDF:", error);
+         alert("Gagal membuat file PDF.");
+         actions.style.display = 'block'; // Pastikan tombol kembali ditampilkan jika ada error
+    });
+}
+
+
+// MODIFIKASI FUNGSI downloadFile() yang sudah ada
+// Sekarang akan memanggil showInvoiceModal untuk menampilkan nota sebelum diunduh
+function downloadFile(orderId) {
+    // Cek apakah order adalah ready-made (yang tombolnya bertuliskan "Unduh")
+    const order = orderHistory.find(o => o.id === orderId);
+    if (order && !order.is_proposal) {
+         // Tampilkan modal nota (di dalamnya ada tombol untuk memicu downloadInvoice)
+         showInvoiceModal(orderId);
+    } else {
+        // Untuk Proposal atau aksi unduh file final project lainnya (Aksi Unduh Lama)
+        alert(`Simulasi: File untuk pesanan ${orderId} sedang dipersiapkan dan diunduh.`);
+    }
+}
+// ... [Kode Skrip lainnya] ...
+</script>
+</body>
+</html>

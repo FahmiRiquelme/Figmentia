@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Berhasil - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png" alt="Logo Figmentia">
+        <span>Figmentia</span>
+    </div>
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html" class="active">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    <div class="success-container">
+        <div class="success-card card">
+            <i class="fas fa-check-circle"></i>
+            
+            <h1>Pembayaran Berhasil!</h1>
+            
+            <p>Terima kasih atas pesanan Anda di Figmentia. Proses desain siap pakai akan segera dimulai, atau proposal kustom Anda akan ditinjau Admin.</p>
+            
+            <div class="transaction-details">
+                <p>Nomor Transaksi: <strong id="trx-id">TRX-FG-20251130-123456</strong></p>
+                <p>Total Dibayar: <strong id="total-paid">Rp 0</strong></p>
+                <p>Status: <span class="status-badge status-success">Selesai</span></p>
+            </div>
+            
+            <p>Anda dapat memantau status pengerjaan desain di halaman Riwayat Pesanan.</p>
+
+            <div class="success-actions">
+                <button class="btn-primary btn-success-main" onclick="window.location.href='HalamanRiwayatPesanan.html'">
+                    <i class="fas fa-scroll"></i> Cek Riwayat Pesanan
+                </button>
+                <button class="btn-secondary btn-back-home" onclick="window.location.href='HalamanDashboard.html'">
+                    <i class="fas fa-home"></i> Kembali ke Dashboard
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    // Format mata uang Rupiah
+    const formatRupiah = (number) => {
+        if (isNaN(number) || number === null) return 'Rp 0';
+        return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(number);
+    };
+
+    function displaySuccessDetails() {
+        const finalTotal = localStorage.getItem('final_checkout_total');
+        const totalPaidElement = document.getElementById('total-paid');
+        const trxIdElement = document.getElementById('trx-id');
+
+        if (finalTotal) {
+            totalPaidElement.textContent = formatRupiah(parseInt(finalTotal));
+            // Hapus data total agar tidak ditampilkan lagi saat refresh
+            localStorage.removeItem('checkout_cart');
+            localStorage.removeItem('checkout_total');
+            localStorage.removeItem('final_checkout_total');
+        } else {
+            // Jika data hilang, gunakan placeholder
+            totalPaidElement.textContent = 'Rp XXX.XXX (Data hilang)';
+        }
+
+        // Generate ID Transaksi baru setiap kali dimuat
+        const generateTrxId = () => {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const random = Math.floor(100000 + Math.random() * 900000);
+            return `TRX-FG-${year}${month}${day}-${random}`;
+        };
+        trxIdElement.textContent = generateTrxId();
+    }
+
+    document.addEventListener('DOMContentLoaded', displaySuccessDetails);
+</script>
+</body>
+</html>

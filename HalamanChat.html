@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Admin - Figmentia</title>
+    <link rel="stylesheet" href="StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    
+    <a href="HalamanChat.html" class="active">💬 Chat Admin</a>
+    
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>💬 Layanan Bantuan Figmentia</h1>
+        <p>Berinteraksi langsung dengan Admin Figmentia sesuai kebutuhan: Desain atau Transaksi.</p>
+    </div>
+
+    <div class="card main-feature-card">
+        <div class="chat-layout">
+            
+            <div class="chat-sidebar">
+                <div class="chat-sidebar-header">
+                    Daftar Percakapan
+                </div>
+                <div class="conversation-list" id="conversationList">
+                    </div>
+            </div>
+            
+            <div class="chat-main">
+                <div class="chat-main-header" id="chatHeader">
+                    Pilih Percakapan
+                </div>
+                
+                <div class="chat-messages-container" id="chatMessages">
+                    <div style="text-align: center; color: #888; padding-top: 50px;">
+                        Silakan pilih Admin yang ingin Anda hubungi dari daftar di samping.
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <textarea placeholder="Ketik pesan Anda di sini..." id="customerChatInput" disabled></textarea>
+                    <button class="btn-primary" onclick="sendMessage()" disabled>
+                        <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Data dummy untuk simulasi percakapan dengan berbagai admin
+    const conversations = [
+        {
+            id: 'design',
+            name: 'Admin Desain (Devi)',
+            status: 'Online - Khusus Proyek Desain',
+            messages: [
+                { type: 'admin', text: 'Halo, saya Devi dari tim Desain. Ada revisi atau pertanyaan terkait progress proyek Anda?', time: '12:30 PM' },
+                { type: 'customer', text: 'Halo Devi. Saya mau revisi sedikit di bagian footer website saya. Bisakah itu ditambahkan?', time: '12:32 PM' },
+                { type: 'admin', text: 'Bisa, mohon kirimkan detail revisinya di sini. Kami akan segera memproses.', time: '12:33 PM' }
+            ]
+        },
+        {
+            id: 'transaction',
+            name: 'Admin Transaksi (Rizky)',
+            status: 'Online - Khusus Pembayaran & Invoice',
+            messages: [
+                { type: 'customer', text: 'Halo Rizky. Pembayaran invoice INV003 saya sudah masuk atau belum ya?', time: '10:15 AM' },
+                { type: 'admin', text: 'Selamat pagi. Kami cek, pembayaran INV003 sebesar Rp 500.000 sudah kami terima. Terima kasih!', time: '10:18 AM' },
+                { type: 'customer', text: 'Oke, terima kasih infonya.', time: '10:20 AM' }
+            ]
+        },
+        {
+            id: 'support',
+            name: 'Admin General Support',
+            status: 'Offline - Hubungi Admin Desain/Transaksi',
+            messages: [
+                { type: 'admin', text: 'Kami tutup sementara untuk General Support. Silakan hubungi Admin Desain atau Admin Transaksi sesuai kebutuhan Anda.', time: '09:00 AM' }
+            ]
+        }
+    ];
+
+    let currentConversationId = null;
+
+    // --- FUNGSI UTAMA ---
+
+    function loadConversations() {
+        const listContainer = document.getElementById('conversationList');
+        listContainer.innerHTML = '';
+        conversations.forEach(conv => {
+            const item = document.createElement('div');
+            item.classList.add('item');
+            if (conv.id === currentConversationId) {
+                item.classList.add('active');
+            }
+            item.setAttribute('data-id', conv.id);
+            item.innerHTML = `
+                <h5>${conv.name}</h5>
+                <p>${conv.status}</p>
+            `;
+            item.onclick = () => selectConversation(conv.id);
+            listContainer.appendChild(item);
+        });
+        
+        // Pilih percakapan pertama secara default saat load
+        if (!currentConversationId && conversations.length > 0) {
+             selectConversation(conversations[0].id);
+        }
+    }
+
+    function selectConversation(id) {
+        currentConversationId = id;
+        loadConversations(); // Reload list untuk menandai yang aktif
+        
+        const conv = conversations.find(c => c.id === id);
+        if (!conv) return;
+
+        const messagesContainer = document.getElementById('chatMessages');
+        const chatHeader = document.getElementById('chatHeader');
+        const chatInput = document.getElementById('customerChatInput');
+        const sendButton = document.querySelector('.chat-input-area button');
+
+        chatHeader.textContent = `Percakapan dengan ${conv.name}`;
+        messagesContainer.innerHTML = ''; // Kosongkan pesan
+
+        // Atur status input berdasarkan status admin
+        const isActive = conv.status.includes('Online');
+        chatInput.disabled = !isActive;
+        sendButton.disabled = !isActive;
+        chatInput.placeholder = isActive ? "Ketik pesan Anda di sini..." : "Admin sedang Offline atau tidak tersedia.";
+
+
+        // Muat pesan-pesan lama
+        conv.messages.forEach(msg => {
+            appendMessage(msg.type, msg.text, msg.time);
+        });
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+
+    // Fungsi untuk menambah pesan ke layar
+    function appendMessage(type, text, time) {
+        const messagesContainer = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message-bubble');
+        
+        if (type === 'customer') {
+            messageDiv.classList.add('customer-reply');
+        } else if (type === 'admin') {
+            messageDiv.classList.add('admin-message');
+        }
+
+        messageDiv.innerHTML = `${text}<span class="chat-timestamp">${time}</span>`;
+        messagesContainer.appendChild(messageDiv);
+    }
+
+    // --- FUNGSI CHAT ---
+
+    function sendMessage() {
+        const inputArea = document.getElementById('customerChatInput');
+        const messageText = inputArea.value.trim();
+        
+        if (messageText === "" || inputArea.disabled) return;
+        
+        const messagesContainer = document.getElementById('chatMessages');
+        const now = new Date();
+        const timestamp = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+        // 1. Tampilkan pesan Customer
+        appendMessage('customer', messageText, timestamp);
+        
+        // Simpan pesan ke data simulasi
+        const conv = conversations.find(c => c.id === currentConversationId);
+        if (conv) {
+             conv.messages.push({ type: 'customer', text: messageText, time: timestamp });
+        }
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        inputArea.value = '';
+        inputArea.focus();
+
+        // 2. SIMULASI BALASAN ADMIN (setelah 2 detik)
+        setTimeout(() => {
+            const adminReply = `[${conv.name}]: Kami telah menerima pesan Anda: "${messageText}". Mohon tunggu balasan aktual.`;
+            const replyTime = new Date();
+            const replyTimestamp = replyTime.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            appendMessage('admin', adminReply, replyTimestamp);
+            
+            // Simpan balasan ke data simulasi
+             if (conv) {
+                conv.messages.push({ type: 'admin', text: adminReply, time: replyTimestamp });
+             }
+            
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 2000);
+    }
+
+    // Menangani tombol Enter
+    document.getElementById('customerChatInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); 
+            sendMessage();
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', loadConversations);
+</script>
+</body>
+</html>

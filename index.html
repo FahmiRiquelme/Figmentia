@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Figmentia</title>
+    <link rel="icon" href="Gambar/Logo2.png" type="image/png">
+    
+    <link rel="stylesheet" href="Stylelogin.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-placeholder">
+                <img src="Gambar/Logo2.png" alt="Figmentia Logo">
+            </div>
+            
+            <div class="role-selector">
+                <input type="radio" id="role-customer" name="role" value="customer" checked>
+                <label for="role-customer">CUSTOMER</label>
+
+                <input type="radio" id="role-admin" name="role" value="admin">
+                <label for="role-admin">ADMIN</label>
+            </div>
+            <form id="loginForm" action="#">
+                <input type="text" id="email" placeholder="Username or Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox" checked>
+                        Remember me
+                    </label>
+                    <a href="Lupakatasandi.html" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-button">LOG IN</button>
+            </form>
+
+            <p class="signup-text">Don't have an account? <a href="Sign-up.html">Sign Up</a></p>
+            
+            <div class="social-login">
+                <div class="social-icon">G</div>
+                <div class="social-icon">f</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            // Ambil nilai peran yang dipilih (customer atau admin)
+            const selectedRole = document.querySelector('input[name="role"]:checked').value;
+
+            if (email && password) {
+                // Logika Pengalihan Halaman Berdasarkan Peran
+                let redirectUrl = '';
+                
+                if (selectedRole === 'admin') {
+                    // Jika peran yang dipilih adalah Admin
+                    redirectUrl = 'AdminDashboard.html'; // Ganti dengan URL dashboard admin Anda
+                    alert('Login sebagai Admin sedang diproses. Mengalihkan ke Dashboard Admin...');
+                } else if (selectedRole === 'customer') {
+                    // Jika peran yang dipilih adalah Customer
+                    redirectUrl = 'HalamanDashboard.html'; // Ganti dengan URL dashboard customer Anda
+                    alert('Login sebagai Customer sedang diproses. Mengalihkan ke Dashboard Customer...');
+                }
+
+                // Simulasikan berhasil login dan redirect
+                // Aktifkan baris di bawah ini saat Anda siap untuk pengalihan halaman yang sebenarnya
+                window.location.href = redirectUrl;
+                
+            } else {
+                alert('Mohon masukkan Email/Username dan Password.');
+            }
+        });
+    </script>
+</body>
+</html>

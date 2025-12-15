@@ -1,0 +1,199 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    /* GRADIENT LATAR BELAKANG */
+    background: linear-gradient(
+        135deg,
+        #0077FF 0%, /* Biru/Cyan */
+        #FF00FF 100% /* Ungu/Magenta */
+    );
+    min-height: 100vh;
+}
+
+/* Container utama untuk memusatkan kartu */
+.login-container {
+    /* Menggunakan flexbox untuk pemusatan yang lebih modern */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-card {
+    background-color: rgba(255, 255, 255, 0.98); /* Putih semi-transparan yang lebih solid */
+    padding: 30px; /* Padding ditingkatkan */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+    text-align: center;
+    max-width: 380px; /* Lebar sedikit diperluas agar Role Selector nyaman */
+    width: 100%;
+}
+
+/* Logo dan Tagline */
+.logo-placeholder {
+    margin-bottom: 20px;
+}
+
+/*ukuran logo*/
+.logo-placeholder img {
+    max-width: 100%; /* Agar responsif dalam max-width login-card */
+    height: auto;
+    width: 250px; /* Diperkecil agar lebih proporsional dalam card */
+}
+
+.logo-placeholder p {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #444;
+    margin-top: 5px;
+}
+
+/* -------------------------------------- */
+/* --- Tambahan CSS untuk Pemilih Peran --- */
+/* -------------------------------------- */
+.role-selector {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: #f0f0f0; 
+    border-radius: 10px; /* Sudut lebih melengkung */
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Efek inset */
+}
+
+.role-selector label {
+    cursor: pointer;
+    padding: 10px 15px; /* Padding vertikal ditingkatkan */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: #555;
+    flex-grow: 1; 
+    text-align: center;
+}
+
+.role-selector input[type="radio"] {
+    display: none; 
+}
+
+/* Gaya untuk peran yang dipilih (Active State) */
+.role-selector input[type="radio"]:checked + label {
+    background-color: #E040FB; /* Menggunakan warna ungu tombol Figmentia */
+    color: white;
+    box-shadow: 0 4px 8px rgba(224, 64, 251, 0.3); /* Bayangan ungu */
+    transform: translateY(-1px); 
+}
+/* -------------------------------------- */
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Opsi "Remember Me" dan "Forgot Password" */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.forgot-password {
+    color: #E040FB; /* Warna Ungu Tombol */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-password:hover {
+    color: #0077FF;
+}
+
+/* Tombol Login */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+
+    /* GRADIENT TOMBOL */
+    background: linear-gradient(
+        90deg, 
+        #00CED1 0%, /* Biru Kehijauan */
+        #E040FB 100% /* Ungu/Magenta */
+    );
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.login-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px); /* Efek sedikit terangkat saat hover */
+}
+
+/* Teks Sign Up */
+.signup-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 20px;
+}
+
+.signup-text a {
+    color: #E040FB; /* Warna Ungu */
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* Login Sosial */
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #444;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.social-icon:hover {
+    border-color: #0077FF;
+}
+
+/* Penyesuaian untuk Halaman Lupa Katasandi (jika menggunakan CSS yang sama) */
+.instruction-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Catatan: Blok .body dan .login-button di akhir yang Anda sertakan dihapus 
+   karena sudah didefinisikan di bagian atas. */

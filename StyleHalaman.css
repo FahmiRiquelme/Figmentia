@@ -1,0 +1,1520 @@
+/* Definisikan variabel warna */
+:root {
+    --color-primary: #8a2be2; /* Ungu Kebiruan (Main Brand Color) */
+    --color-secondary: #ff00ff; /* Magenta (Accent Color) */
+    --color-background: #f8f9fa; /* Abu-abu terang untuk latar belakang */
+    --color-white: white;
+    --sidebar-width: 250px;
+}
+
+
+
+/* ======================= Header/Top Navbar (Admin & Customer) ======================= */
+#header, #header-customer { 
+    background: var(--color-white);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - var(--sidebar-width));
+    left: var(--sidebar-width);
+    top: 0;
+    z-index: 1000;
+}
+
+.logo, .logo-customer {
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.user-info, .user-info-customer {
+    text-align: left;
+    padding-right: 30px; 
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+    /* Menata icon dan teks di header */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ======================= Sidebar/Navigasi (Admin & Customer) ======================= */
+#sidebar, #sidebar-customer {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Gradient Warna Figmentia */
+    background: linear-gradient(135deg, #007bff, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding-top: 15px;
+}
+
+.sidebar-logo {
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding: 15px 1px;
+    margin-bottom: 10px;
+    color: var(--color-white);
+    text-align: left; 
+}
+
+.sidebar-logo-img {
+    width: 100px; 
+    height: 100px; 
+    object-fit: contain;
+}
+
+#sidebar a, #sidebar-customer a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--color-white);
+    display: flex; /* Untuk menata icon dan teks */
+    align-items: center;
+    gap: 10px;
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active, 
+#sidebar-customer a:hover, #sidebar-customer a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Garis penanda aktif/hover */
+    border-left: 5px solid var(--color-secondary); 
+    padding-left: 15px;
+}
+
+.logout-link {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Override hover untuk tombol logout agar tidak ada garis di kiri */
+    border-left: none !important;
+}
+
+.profile-link {
+    /* Gaya untuk tautan profil agar berbeda dari menu utama, diletakkan sebelum logout */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
+}
+
+/* ======================= Konten Utama & Kartu ======================= */
+#main-content {
+    margin-left: var(--sidebar-width);
+    padding: 80px 20px 20px 20px;
+}
+
+.card {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.main-feature-card h2 {
+    color: var(--color-primary);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+
+
+/* --- Customer Specific: Portfolio/Katalog Grid --- */
+.portfolio-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.portfolio-item {
+    flex: 1; 
+    min-width: 300px;
+}
+
+.portfolio-image {
+    width: 100%; 
+    border-radius: 8px;
+    height: 180px; 
+    object-fit: cover;
+}
+
+.portfolio-title {
+    color: var(--color-primary); 
+    margin-top: 15px;
+}
+
+
+/* ======================= Tombol Umum & Aksi ======================= */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: #6a1ba3;
+}
+
+/* Button accent for customer/portfolio action (Magenta) */
+.btn-accent {
+    background-color: var(--color-secondary); 
+}
+
+.btn-accent:hover {
+    background-color: #cc00cc;
+}
+
+.btn-secondary {
+    background-color: #6c757d; 
+    color: var(--color-white);
+    padding: 8px 12px; 
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: var(--color-white);
+    padding: 8px 12px;
+    margin-left: 5px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* ======================= Tabel Data & Badge (Admin related) ======================= */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: 600;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.footer-note {
+    text-align: center !important;
+    font-style: italic;
+    color: #888;
+    background-color: #fafafa !important;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+}
+.badge-success { 
+    background-color: #28a745; 
+    color: var(--color-white); 
+}
+.badge-danger { 
+    background-color: #dc3545; 
+    color: var(--color-white); 
+} 
+.badge-info { 
+    background-color: #0dcaf0; 
+    color: #333; 
+}
+.badge-warning { 
+    background-color: #ffc107; 
+    color: #333; 
+} 
+.badge-primary { 
+    background-color: var(--color-primary); 
+    color: var(--color-white); 
+}
+
+/* ======================= VARIABEL DASAR (Penting untuk konsistensi warna) ======================= */
+
+/* ======================= LAYOUT KHUSUS KATALOG & KERANJANG ======================= */
+
+/* Wrapper untuk layout 2 kolom (Katalog di kiri, Keranjang di kanan) */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Memastikan responsif di layar kecil */
+}
+
+/* Kolom utama (Katalog) */
+.content-main {
+    flex: 3;
+    min-width: 60%;
+    min-width: 300px; /* Minimal lebar agar item tidak terlalu sempit */
+}
+
+/* Kolom samping (Keranjang) */
+.content-side {
+    flex: 1;
+    min-width: 300px; /* Lebar minimum Keranjang */
+}
+
+/* Gaya Grid Katalog */
+.catalog-grid {
+    display: grid;
+    /* Membuat grid responsif: 1 kolom di layar kecil, 2+ kolom di layar besar */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Gaya Card Layanan */
+.service-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+}
+
+.service-card h3 {
+    color: var(--color-primary);
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin: 10px 0;
+}
+
+
+/* ======================= GAYA KERANJANG BELANJA ======================= */
+
+.cart-summary {
+    background-color: var(--color-white);
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.cart-summary h4 {
+    color: var(--color-primary);
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart-item-list {
+    margin-bottom: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Gaya untuk setiap item di daftar keranjang */
+.cart-item-list div {
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+/* Gaya untuk total harga */
+.total-price {
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+}
+/*BATAS
+
+/* --- Bagian Utama & Layout Grid --- */
+
+/* Menggunakan layout 2 kolom untuk main-content dan cart (di sini fokus ke content-main) */
+/* Diasumsikan Anda memiliki struktur dasar untuk main-content dan content-wrapper */
+
+/* Kontainer untuk 3 tombol layanan */
+.service-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* Jarak antar kartu */
+    margin-bottom: 30px;
+    /* Pastikan .content-main memberikan lebar yang cukup untuk ini */
+}
+
+/* Style dasar untuk setiap kartu pilihan layanan */
+.service-option-card {
+    flex: 1; /* Membuat setiap kartu mengambil ruang yang sama */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Efek saat hover */
+.service-option-card:hover {
+    border-color: #7b00ff; /* Border ungu saat di-hover */
+    box-shadow: 0 6px 15px rgba(123, 0, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Judul di dalam kartu */
+.service-option-card h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+/* Ikon di dalam judul */
+.service-option-card h3 i {
+    font-size: 1.2em;
+    margin-right: 10px;
+    color: #7b00ff; /* Warna ungu untuk ikon utama */
+}
+
+/* Deskripsi singkat di dalam kartu */
+.service-option-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Style khusus untuk kartu "Asisten Briefing Pintar" */
+.ai-partner-highlight {
+    border-left: 5px solid #ff007b; /* Garis sorot merah muda */
+    background-color: #fff0f5; /* Background sedikit berbeda */
+}
+
+.ai-partner-highlight h3 i {
+    color: #ff007b; /* Ubah warna ikon menjadi merah muda */
+}
+
+/* Style untuk tag **INOVASI!** */
+.ai-partner-highlight p strong {
+    color: #ff007b;
+    font-weight: 700;
+}
+
+/* PENGATURAN UMUM (Jika belum ada) */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+}
+
+/* Style untuk banner ungu (greeting-banner) */
+.greeting-banner {
+    background: linear-gradient(90deg, #7b00ff 0%, #ff007b 100%);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.greeting-banner h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.greeting-banner p {
+    margin-bottom: 0;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+/* Responsivitas (Opsional: agar terlihat bagus di layar kecil) */
+@media (max-width: 992px) {
+    .service-nav {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ======================= GAYA TOMBOL SPESIFIK ======================= */
+
+.btn-accent {
+    background-color: var(--color-secondary); /* Warna Magenta untuk tombol beli */
+    color: var(--color-white);
+}
+
+.btn-accent:hover {
+    background-color: #cc00cc;
+}
+
+/* ======================= GAYA MODAL/POP-UP ======================= */
+.modal {
+    display: none; /* Tersembunyi secara default */
+    position: fixed; 
+    z-index: 2000; /* Pastikan di atas elemen lain */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); /* Background gelap transparan */
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: 5% auto; /* 5% dari atas dan di tengah */
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%; /* Lebar konten modal */
+    max-width: 900px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Penyesuaian Tabel di dalam Modal */
+.modal-content .data-table th, 
+.modal-content .data-table td {
+    font-size: 13px; /* Ukuran font lebih kecil untuk tabel di modal */
+}
+
+/* Pastikan gaya .data-table standar (dari respons sebelumnya) juga ada di StyleHalaman.css */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+}
+/* ... dan gaya CSS dasar lainnya */
+
+/* --- Form Layout & Controls --- */
+.custom-form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Jarak antar grup input */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Penting agar padding tidak melebarkan elemen */
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+.form-actions {
+    margin-top: 10px;
+    display: flex;
+    /* Membuat tombol sebaris */
+    align-items: center; 
+}
+/* ...Tambahkan juga CSS Modal dan Tabel dari respons sebelumnya jika belum ada */
+
+/* --- Gaya Tabel Riwayat Pesanan --- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.history-table th, .history-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+}
+
+.history-table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.status-success {
+    background-color: #e6ffed; /* Hijau muda */
+    color: #1e8449; /* Hijau tua */
+}
+
+.status-pending {
+    background-color: #fff3e0; /* Kuning muda */
+    color: #f39c12; /* Kuning tua */
+}
+
+.status-progress {
+    background-color: #eaf4ff; /* Biru muda */
+    color: #3498db; /* Biru tua */
+}
+
+.status-danger {
+    background-color: #fde8e8; /* Merah muda */
+    color: #e74c3c; /* Merah tua */
+}
+
+/* --- Tombol kecil di dalam tabel --- */
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* Pastikan Anda juga sudah menambahkan semua gaya untuk CHAT MODAL dari respons sebelumnya! */
+
+/* ======================= GAYA KHUSUS CHAT FULL-PAGE ======================= */
+
+/* WARNA YANG DIGUNAKAN (Asumsi dari desain Anda): 
+   --color-primary: Warna utama (misal: Biru/Ungu Tua)
+   --color-secondary: Warna aksen/tegas (misal: Magenta/Ungu Terang) 
+*/
+
+.chat-layout {
+    display: flex;
+    min-height: 600px; 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.chat-sidebar {
+    width: 280px;
+    background-color: #f7f7f7;
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.chat-sidebar-header {
+    padding: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    color: var(--color-primary, #3498db);
+    background-color: #eef; /* Latar belakang header sidebar */
+}
+
+.conversation-list .item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.conversation-list .item:hover {
+    background-color: #ebebeb;
+}
+
+.conversation-list .item.active {
+    /* Warna aktif di sidebar customer */
+    background-color: var(--color-secondary, #9b59b6); 
+    color: white;
+    position: relative;
+}
+
+.conversation-list .item.active p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.item h5 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.item p {
+    margin: 0;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.chat-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-main-header {
+    /* Warna Header Chat Customer (Menggunakan warna aksen/secondary) */
+    background-color: var(--color-secondary, #9b59b6);
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.chat-messages-container {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #e5ddd5; /* Background chat: Warna netral yang sedikit hangat */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gaya pesan disesuaikan untuk CHAT CUSTOMER */
+.message-bubble {
+    max-width: 65%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pesan dari Admin (Tampil di kiri) */
+.admin-message {
+    align-self: flex-start;
+    background-color: #fff; /* Balasan Admin: Putih */
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+/* Pesan dari Customer (Tampil di kanan) */
+.customer-reply {
+    align-self: flex-end;
+    /* Balasan Customer: Warna aksen/secondary Anda */
+    background-color: var(--color-secondary, #9b59b6); 
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.chat-timestamp {
+    font-size: 10px;
+    margin-top: 5px;
+    align-self: flex-end;
+    color: #999;
+}
+.customer-reply .chat-timestamp {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-input-area {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    background-color: #f7f7f7;
+    flex-shrink: 0;
+}
+
+.chat-input-area textarea {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    resize: none;
+    min-height: 40px;
+    font-family: inherit;
+}
+
+.chat-input-area button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ======================= GAYA KHUSUS HALAMAN UMPAN BALIK ======================= */
+
+.rating-area {
+    /* Mengatur tata letak vertikal untuk bintang dan label */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Sejajarkan ke kiri */
+    margin-bottom: 20px;
+}
+
+.rating-stars {
+    font-size: 36px; /* Ukuran bintang */
+    color: #ccc; /* Warna bintang non-aktif (abu-abu muda) */
+    cursor: pointer;
+    user-select: none; /* Mencegah bintang terpilih seperti teks */
+}
+
+/* Mengatur jarak antar bintang */
+.rating-stars .fa-star {
+    margin-right: 3px; 
+    transition: color 0.2s;
+}
+
+/* Warna bintang aktif (setelah diklik atau saat di-hover) */
+.rating-stars .rated {
+    color: #f39c12; /* Warna kuning/oranye tegas untuk rating */
+}
+
+.rating-label {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-primary, #3498db); /* Gunakan warna primary Anda */
+}
+
+/* Menyesuaikan gaya textarea/select jika belum ada di CSS utama */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Jika Anda memiliki class .form-control, pastikan sudah diatur agar input, select, dan textarea terlihat seragam */
+/* Contoh minimal: */
+/*
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+*/
+
+/* ======================= GAYA KHUSUS HALAMAN PROFIL ======================= */
+
+/* --- Profile Header Card (Ringkasan Akun) --- */
+
+.profile-header-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+    /* Menggunakan warna latar belakang yang sedikit berbeda agar menonjol */
+    background-color: var(--color-light-bg, #f7f7f7); 
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    border-radius: 8px 8px 0 0; /* Sesuaikan jika card memiliki border-radius */
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: var(--color-primary, #3498db);
+    /* Efek border ganda yang bersih */
+    box-shadow: 0 0 0 5px white, 0 0 0 7px var(--color-secondary, #9b59b6);
+    flex-shrink: 0;
+}
+
+.profile-info h3 {
+    margin: 0 0 5px 0;
+    color: var(--color-primary, #3498db);
+    font-size: 20px;
+}
+
+.profile-info p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* --- Navigasi Tab (Data Profil, Aktivitas, Keamanan) --- */
+
+.tab-nav {
+    display: flex;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+    padding: 0 10px; /* Jarak agar tab tidak terlalu mepet ke kiri */
+}
+
+.tab-nav button {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #777;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 3px solid transparent;
+    font-size: 15px;
+}
+
+.tab-nav button:hover:not(.active) {
+    color: #333;
+}
+
+.tab-nav button.active {
+    color: var(--color-secondary, #9b59b6); /* Warna tab aktif */
+    border-bottom: 3px solid var(--color-secondary, #9b59b6);
+}
+
+.tab-content .tab-pane {
+    display: none;
+    padding: 10px;
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+}
+
+/* --- Gaya Form (Memastikan konsistensi) --- */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- Gaya Khusus Aktivitas Akun (Timeline) --- */
+
+.activity-item {
+    display: flex;
+    border-left: 3px solid #ddd; /* Garis timeline */
+    padding: 10px 0 10px 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+/* Titik pada timeline */
+.activity-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 15px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: var(--color-primary, #3498db);
+    border: 3px solid white; /* Membuat titik menonjol dari latar belakang */
+    box-shadow: 0 0 0 2px var(--color-primary, #3498db); /* Lingkaran luar titik */
+}
+
+/* Warna spesifik untuk tipe aktivitas */
+.activity-item.login::before { 
+    background-color: #27ae60; /* Hijau untuk Login */
+    box-shadow: 0 0 0 2px #27ae60; 
+}
+.activity-item.transaction::before { 
+    background-color: #e67e22; /* Oranye untuk Transaksi */
+    box-shadow: 0 0 0 2px #e67e22; 
+}
+.activity-item.order::before { 
+    background-color: #3498db; /* Biru untuk Pesanan */
+    box-shadow: 0 0 0 2px #3498db; 
+}
+
+
+.activity-details p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.activity-details .timestamp {
+    font-size: 12px;
+    color: #999;
+    margin-top: 3px;
+    display: block;
+}
+
+.activity-details strong {
+    color: var(--color-primary, #3498db);
+}
+
+/* ======================= GAYA KHUSUS PEMBAYARAN & INVOICE ======================= */
+
+/* --- Layout Pembayaran Dua Kolom --- */
+.payment-layout {
+    display: flex;
+    gap: 30px;
+    padding-bottom: 70px; /* Ruang untuk tombol fixed */
+}
+
+.invoice-summary, .payment-options {
+    flex: 1;
+    min-width: 300px;
+}
+
+.invoice-summary h2, .payment-options h2 {
+    color: var(--color-primary, #3498db);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+/* --- Detail Invoice --- */
+.order-items-list {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.item-row, .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.detail-row.total h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--color-accent, #9b59b6);
+}
+
+/* --- Pilihan Metode Pembayaran (Radio Card) --- */
+.payment-group {
+    margin-bottom: 15px;
+}
+
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+.payment-method-card:hover {
+    border-color: var(--color-primary, #3498db);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.payment-method-card input[type="radio"] {
+    display: none; /* Sembunyikan radio button asli */
+}
+
+/* Tampilan saat radio button dipilih */
+.payment-method-card input[type="radio"]:checked + span {
+    color: var(--color-secondary, #9b59b6);
+    font-weight: 600;
+}
+.payment-method-card input[type="radio"]:checked + span + i {
+    color: var(--color-secondary, #9b59b6);
+}
+
+.payment-method-card input[type="radio"]:checked ~ .fas.fa-chevron-right {
+    font-weight: bold;
+}
+
+.payment-method-card input[type="radio"]:checked ~ .fa-chevron-right {
+    /* Tambahkan indikator visual saat terpilih */
+    color: var(--color-secondary, #9b59b6);
+}
+
+.payment-method-card i.fas:first-child {
+    margin-right: 10px;
+}
+
+.terms-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 20px;
+}
+
+.large-btn {
+    padding: 15px 30px !important;
+    font-size: 1.1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.checkout-button-fixed {
+    /* Membuat tombol tetap di bawah (jika dibutuhkan) */
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    /* Atau non-aktifkan position: absolute jika Anda ingin tombol mengikuti scroll */
+}
+
+/* --- Halaman Sukses Pembayaran --- */
+
+.success-card {
+    text-align: center;
+    padding: 40px;
+}
+
+.success-icon {
+    font-size: 80px;
+    color: #2ecc71; /* Warna hijau sukses */
+    margin-bottom: 20px;
+}
+
+.success-card h2 {
+    color: #27ae60;
+    margin-bottom: 10px;
+}
+
+.invoice-number-text {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.success-details-box {
+    width: 80%;
+    max-width: 450px;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.success-details-box .detail-row {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.success-details-box .detail-row:last-child {
+    border-bottom: none;
+}
+
+.highlight-text {
+    font-weight: 700;
+    color: var(--color-primary, #3498db);
+}
+
+.status-paid {
+    color: #27ae60 !important;
+}
+
+.next-step-info {
+    margin: 30px 0;
+    color: #777;
+}
+
+.success-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.success-actions .large-btn {
+    width: auto;
+    min-width: 200px;
+}
+
+/* Responsif sederhana */
+@media (max-width: 900px) {
+    .payment-layout {
+        flex-direction: column;
+    }
+}
+/* ======================= GAYA KHUSUS HALAMAN CHECKOUT (Pembayaran) ======================= */
+
+/* Container utama di halaman pembayaran (menggunakan layout 2 kolom) */
+.checkout-layout {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Pastikan responsif */
+}
+
+/* Kolom kiri: Detail Pesanan dan Metode Pembayaran */
+.checkout-details {
+    flex: 2; /* Mengambil 2/3 ruang */
+    min-width: 450px;
+}
+
+/* Kolom kanan: Ringkasan Pembayaran */
+.checkout-summary {
+    flex: 1; /* Mengambil 1/3 ruang */
+    min-width: 300px;
+    max-width: 350px;
+}
+
+/* --- Gaya Bagian Detail Pesanan (Detail Pesanan) --- */
+.order-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted #e0e0e0;
+    font-size: 15px;
+}
+
+.order-list-item:last-child {
+    border-bottom: none;
+}
+
+.item-name-checkout {
+    color: var(--color-text-dark);
+}
+
+.item-price-checkout {
+    font-weight: 600;
+}
+
+/* --- Gaya Bagian Metode Pembayaran --- */
+.payment-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.payment-option {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    font-weight: 600;
+    color: #555;
+}
+
+.payment-option:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.payment-option.selected {
+    border-color: var(--color-secondary); /* Warna aksen yang menonjol */
+    background-color: #fff0f9; /* Latar belakang sangat muda */
+    box-shadow: 0 4px 10px rgba(255, 51, 204, 0.2);
+    color: var(--color-primary);
+}
+
+.payment-option i {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: var(--color-primary);
+}
+
+.payment-option.selected i {
+    color: var(--color-secondary);
+}
+
+/* --- Gaya Ringkasan Pembayaran --- */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.summary-line.tax-fee {
+    font-style: italic;
+    color: #6c757d;
+}
+
+.summary-line.total {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    border-top: 2px solid var(--color-primary);
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+#checkout-payment-button {
+    width: 100%;
+    padding: 15px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* ======================= GAYA KHUSUS HALAMAN SUKSES (Pembayaran Berhasil) ======================= */
+
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.success-card {
+    max-width: 600px;
+    text-align: center;
+    padding: 40px 30px;
+    border: 3px solid #e6ffed; /* Border hijau muda */
+}
+
+.success-card i.fas.fa-check-circle {
+    font-size: 80px;
+    color: #28a745; /* Hijau Sukses */
+    margin-bottom: 20px;
+}
+
+.success-card h1 {
+    font-size: 32px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.success-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.transaction-details {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.transaction-details p {
+    margin: 5px 0;
+    font-size: 15px;
+    color: var(--color-text-dark);
+}
+
+.transaction-details strong {
+    color: var(--color-primary);
+}
+
+.success-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Tombol Aksi di Halaman Sukses */
+.btn-success-main {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+.btn-success-main:hover {
+    background-color: #1e8449;
+}
+.btn-back-home {
+    background-color: #6c757d; /* Abu-abu netral */
+    color: white;
+}
+.btn-back-home:hover {
+    background-color: #5a6268;
+}
+
+/* ======================= Media Queries for Responsiveness ======================= */
+@media (max-width: 992px) {
+    /* Di layar tablet/laptop kecil, layout checkout menjadi satu kolom */
+    .checkout-details, .checkout-summary {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    .checkout-layout {
+        flex-direction: column;
+    }
+}
+
+/* Styling untuk Modal Nota */
+.invoice-window {
+    display: none; /* Sembunyikan secara default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 50px;
+}
+
+.invoice-container {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.invoice-body {
+    padding: 20px;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+/* Styling untuk Template Nota */
+.nota-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nota-header h2 {
+    color: #555;
+}
+
+.nota-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.nota-info div {
+    width: 48%;
+}
+
+.nota-info strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.nota-items table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.nota-items th, .nota-items td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.nota-items th {
+    background-color: #f2f2f2;
+}
+
+.nota-total {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #28a745;
+    padding-top: 10px;
+}
+
+/* Utility Class untuk print */
+@media print {
+    .invoice-window {
+        position: relative;
+        display: block;
+        background-color: white;
+        padding-top: 0;
+    }
+    .invoice-container, .modal-content {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        max-width: none;
+        border: none;
+    }
+    .invoice-actions, .invoice-header .close-button {
+        display: none !important;
+    }
+}
