@@ -1,0 +1,641 @@
+/* Definisikan variabel warna */
+:root {
+    --color-primary: #8a2be2; /* Ungu Kebiruan */
+    --color-secondary: #ff00ff; /* Magenta */
+    --color-background: #f8f9fa; /* Abu-abu terang */
+    --color-white: white;
+    --sidebar-width: 250px;
+}
+
+/* Pengaturan Dasar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    color: #333;
+}
+
+/* Header/Navbar */
+#header {
+    background: var(--color-white);
+    padding: 15px 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - var(--sidebar-width)); /* Lebar header disesuaikan dengan sidebar */
+    left: var(--sidebar-width);
+    top: 0;
+    z-index: 1000;
+}
+
+.user-info {
+    text-align: left; /* Sudah rata kiri secara default, tapi untuk memastikan */
+    padding-right: 45px; /* Tambahkan ruang (padding) di sebelah kanan */
+    font-weight: bold;
+    color: #555; /* Ubah warna agar lebih terlihat */
+}
+
+/* Sidebar */
+#sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Gradient yang meniru mockup */
+    background: linear-gradient(135deg, #007bff, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding-top: 15px;
+}
+
+.sidebar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--color-white);
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.logout-link {
+    /* Posisikan link logout di bawah (jika perlu menggunakan JS/Flexbox untuk sticky footer) */
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Konten Utama */
+#main-content {
+    margin-left: var(--sidebar-width);
+    padding: 80px 20px 20px 20px; /* Padding atas disesuaikan dengan tinggi header */
+}
+
+/* Kartu */
+.card {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.welcome-card {
+    background: linear-gradient(90deg, #7b68ee, var(--color-primary));
+    color: var(--color-white);
+}
+
+/* Tabel Data */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Tombol */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: #6a1ba3;
+}
+
+.btn-review {
+    background-color: #ffc107; /* Kuning */
+    color: #333;
+}
+.btn-review:hover {
+    background-color: #e0a800;
+}
+
+.btn-edit {
+    background-color: #007bff; /* Biru */
+    color: var(--color-white);
+}
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+/* Aksi Cepat */
+.quick-actions .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* --- Styling Khusus Pengelolaan Pesanan --- */
+
+/* Tab Navigasi */
+.tab-nav {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+    margin-right: 5px;
+}
+
+.tab-link.active {
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+    font-weight: bold;
+}
+
+/* Tabel Pesanan */
+.order-table th {
+    background-color: #eef; /* Latar belakang header lebih cerah */
+}
+
+/* Badge Status (Penting untuk visualisasi cepat) */
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.badge-info {
+    background-color: #0dcaf0;
+    color: #333;
+}
+
+.badge-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.badge-success {
+    background-color: #198754;
+    color: var(--color-white);
+}
+
+/* Tombol Aksi Pesanan */
+.btn-validate {
+    background-color: #0d6efd; /* Biru terang untuk validasi */
+    color: var(--color-white);
+    margin-right: 5px;
+}
+
+.btn-success {
+    background-color: #28a745; /* Hijau untuk finalisasi */
+    color: var(--color-white);
+}
+
+.btn-validate:hover {
+    background-color: #0a58ca;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+/* Definisikan variabel warna */
+:root {
+    --color-primary: #8a2be2; /* Ungu Kebiruan (Main Brand Color) */
+    --color-secondary: #ff00ff; /* Magenta (Accent Color) */
+    --color-background: #f8f9fa; /* Abu-abu terang untuk latar belakang */
+    --color-white: white;
+    --sidebar-width: 250px;
+}
+
+/* ======================= Pengaturan Dasar ======================= */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    color: #333;
+}
+
+/* ======================= Header/Top Navbar ======================= */
+#header {
+    background: var(--color-white);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - var(--sidebar-width));
+    left: var(--sidebar-width);
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.user-info {
+    text-align: left;
+    padding-right: 30px; /* Memberi jarak dari tepi kanan */
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+/* ======================= Sidebar/Navigasi ======================= */
+#sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Gradient yang meniru mockup */
+    background: linear-gradient(135deg, #007bff, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding-top: 15px;
+}
+
+.sidebar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    /* Align logo image and text side by side */
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    padding: 15px 1px;
+    margin-bottom: 10px;
+    color: var(--color-white);
+    text-align: left; /* Align text to the left when side by side */
+}
+
+.sidebar-logo-img {
+    width: 100px; /* Adjust width for better alignment */
+    height: 100px; /* Adjust height for better alignment */
+    object-fit: contain;
+}
+
+#sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--color-white);
+    display: block;
+    transition: 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.logout-link {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ======================= Konten Utama & Kartu ======================= */
+#main-content {
+    margin-left: var(--sidebar-width);
+    padding: 80px 20px 20px 20px;
+}
+
+.card {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.welcome-card {
+    background: linear-gradient(90deg, #7b68ee, var(--color-primary));
+    color: var(--color-white);
+    padding: 25px;
+}
+
+/* ======================= Styling Pengelolaan Pesanan ======================= */
+
+/* Tombol Aksi Ikon (Review, Update Status, Validasi) */
+.table-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+}
+
+.action-icon-btn {
+    background: #f1f1f1;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.action-icon-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.action-icon-btn .icon {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: var(--color-primary);
+}
+
+/* Badge Status */
+.badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.badge-warning { background-color: #ffc107; color: #333; }
+.badge-info { background-color: #0dcaf0; color: #333; }
+.badge-primary { background-color: var(--color-primary); color: var(--color-white); }
+.badge-success { background-color: #28a745; color: var(--color-white); }
+.badge-danger { background-color: #dc3545; color: var(--color-white); }
+
+
+/* Tabel Pesanan Styling */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+}
+
+.data-table th {
+    background-color: #f5f5ff;
+    color: #555;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #6a1ba3;
+}
+
+.link-file {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* Warna latar belakang baris berdasarkan status */
+.status-new { background-color: #fffde7; } 
+.status-pending-payment { background-color: #e3f2fd; } 
+.status-processing { background-color: #f0f8ff; } 
+.status-complete { background-color: #f5fff5; }
+
+/* ======================= Styling Fitur Chat ======================= */
+.chat-interface-card {
+    padding: 0; 
+}
+
+.chat-container {
+    display: flex;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Sisi Kiri: Daftar Klien */
+.chat-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    border-right: 1px solid #ddd;
+    background-color: #f7f7f7;
+    padding: 15px 0;
+    overflow-y: auto;
+}
+
+.chat-sidebar h5 {
+    padding: 0 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--color-primary);
+}
+
+.conversation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conversation-list li {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.conversation-list li:hover, .conversation-list li.active {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.conversation-list .client-name {
+    display: block;
+    font-weight: bold;
+}
+
+.conversation-list .last-message {
+    font-size: 12px;
+    color: #777;
+    font-weight: normal;
+}
+
+/* Sisi Kanan: Jendela Chat Aktif */
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 15px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    max-width: 65%;
+    line-height: 1.4;
+}
+
+/* Pesan Klien (Rata Kiri) */
+.message.client {
+    background-color: #e6f3ff;
+    align-self: flex-start;
+}
+
+/* Pesan Admin (Rata Kanan) */
+.message.admin {
+    background-color: #d1ffc9;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+/* Input Chat */
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.chat-input input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 14px;
+}
+
+.chat-input .btn-send {
+    background-color: #007bff;
+    color: var(--color-white);
+    padding: 12px 20px;
+    border-radius: 0 5px 5px 0;
+    margin-left: -1px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.chat-input .btn-send:hover {
+    background-color: #0056b3;
+}
+
+/* ======================= Styling Manajemen Keuangan ======================= */
+
+.transaction-management-card {
+    margin-bottom: 30px;
+}
+
+/* Header tabel transaksi dengan warna yang berbeda (kuning/orange muda) */
+.transaction-table th {
+    background-color: #ffe0b2; /* Warna berbeda untuk header Transaksi */
+    color: #333;
+}
+
+/* Kontrol untuk Filter Laporan (Select Bulan/Tahun) */
+.report-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.report-controls label {
+    font-weight: bold;
+    color: #555;
+}
+
+.report-controls select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Tombol Sekunder untuk Export PDF/Excel */
+.btn-secondary {
+    background-color: #6c757d; /* Abu-abu */
+    color: var(--color-white);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Gaya untuk Ringkasan Laporan */
+#report-summary strong {
+    font-size: 1.1em;
+}

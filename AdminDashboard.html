@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Figmentia</title>
+    
+    <link rel="stylesheet" href="StyleAdmin.css">
+    
+    </head>
+<body>
+
+    <div id="header">
+        <div class="logo">Figmentia (Admin)</div>
+        <div class="user-info">👤 Fahmi Riquelme (Admin)</div>
+    </div>
+
+    <div id="sidebar">
+        <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+        
+        <a href="AdminDashboard.html" class="active">🏠 Dashboard</a>
+        <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+        <a href="AdminFiturChat.html">💬 Chat</a>
+        <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+        <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+        <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+        <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+        <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+    <div id="main-content">
+        <div class="card welcome-card">
+            <h2>Selamat Datang, Fahmi Riquelme!</h2>
+            <p>Silakan gunakan menu di samping untuk mengelola pesanan, konten, dan laporan.</p>
+        </div>
+
+        <div id="content-area">
+            <h3>Dashboard Admin</h3>
+            
+            <div class="card">
+                <h4>Ringkasan Pesanan Aktif</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID Pesanan</th>
+                            <th>Klien</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FIG00128</td>
+                            <td>Budi Santoso</td>
+                            <td>Menunggu Review</td>
+                            <td><button class="btn-review" onclick="reviewOrder('FIG00128')">Review</button></td>
+                        </tr>
+                        <tr>
+                            <td>FIG00129</td>
+                            <td>Siti Aisyah</td>
+                            <td>Diproses</td>
+                            <td><button class="btn-edit" onclick="goToPage('FIG00129')">Lihat</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card quick-actions">
+                <h4>Fitur Cepat</h4>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="goToPage('laporan')">Lihat Laporan Bulanan</button>
+                    <button class="btn-primary" onclick="goToPage('katalog')">Kelola Katalog</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Fungsi JS dasar (dapat dikembangkan lebih lanjut di file JS terpisah)
+        function goToPage(pageId) {
+            console.log("Navigasi ke fitur:", pageId);
+        }
+
+        function reviewOrder(orderId) {
+            console.log("Membuka detail pesanan:", orderId);
+        }
+    </script>
+</body>
+</html>

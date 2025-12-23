@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Figmentia</title>
+    
+    <link rel="stylesheet" href="StyleAdmin.css">
+</head>
+<body>
+
+    <div id="header">
+        <div class="logo">Figmentia (Admin)</div>
+        <div class="user-info">👤 Fahmi Riquelme (Admin)</div> 
+    </div>
+
+    <div id="sidebar">
+        <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+        
+        <a href="AdminDashboard.html">🏠 Dashboard</a>
+        <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+        <a href="AdminFiturChat.html" class="active">💬 Chat</a>
+        <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+        <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+        <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+        <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+        <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+    <div id="main-content">
+
+        <div id="chat-view" class="card main-feature-card">
+            <h2>💬 Chat dengan Klien</h2>
+            <p>Berkomunikasi secara real-time dengan klien mengenai pesanan dan revisi.</p>
+
+            <div class="card sub-card chat-interface-card">
+                <div class="chat-container">
+                    <div class="chat-sidebar">
+                        <h5>Riwayat Percakapan Aktif</h5>
+                        <ul class="conversation-list">
+                            <a href="AdminFiturChat.html">
+                                <li onclick="loadChat('FIG00128')">
+                                <span class="client-name">Budi Santoso</span>
+                                <span class="last-message">Status pesanan...</span>
+                            </li>
+                            </a>
+                            <a href="AdminFiturChat2.html">
+                            <li onclick="loadChat('FIG00130')">
+                                <span class="client-name">Rina Dewi (NEW)</span></a>
+                                <span class="last-message">Tanya harga final...</span>
+                            </li>
+                            </a>
+                            <a href="AdminFiturChat3.html">
+                            <li class="active" onclick="loadChat('FIG00129')">
+                                <span class="client-name">Siti Aisyah</span>
+                                <span class="last-message">Desain sudah 50%...</span>
+                            </li>
+                            </a>
+                        </ul>
+                    </div>
+                    
+                    <div class="chat-window">
+                        <div class="chat-header">Percakapan dengan Budi Santoso (FIG00128)</div>
+                        <div class="chat-messages" id="chat-log">
+                            <div class="message client">Halo Admin, saya mau tanya status pesanan FIG00128. Sudah ada progress?</div>
+                            <div class="message admin">Selamat siang, Budi. Pesanan Anda sedang dalam proses 70%. Kami akan kirim preview segera.</div>
+                            <div class="message client">Baik, terima kasih infonya!</div>
+                        </div>
+                        
+                        <div class="chat-input">
+                            <input type="text" id="message-input" placeholder="Ketik balasan Anda di sini...">
+                            <button class="btn-primary btn-send" onclick="sendMessage()">Kirim</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+
+    <script>
+        // Fungsi JS Dasar (Perlu dikembangkan dengan Backend untuk fungsionalitas nyata)
+        function editOrder(orderId) {
+            console.log("Membuka detail edit untuk: " + orderId);
+        }
+        function openReviewModal(orderId) {
+            console.log("Membuka Modal Review & Penentuan Tarif untuk: " + orderId);
+        }
+        function updateStatus(orderId) {
+            console.log("Membuka form untuk mengubah status layanan untuk: " + orderId);
+        }
+        function validatePayment(orderId) {
+            console.log("Memproses validasi bukti pembayaran.");
+        }
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            const chatLog = document.getElementById('chat-log');
+            if (message) {
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message admin';
+                newMessage.textContent = message;
+                chatLog.appendChild(newMessage);
+                input.value = '';
+                chatLog.scrollTop = chatLog.scrollHeight; 
+            }
+        }
+        function loadChat(orderId) {
+            console.log("Memuat riwayat chat untuk pesanan: " + orderId);
+        }
+    </script>
+</body>
+</html>

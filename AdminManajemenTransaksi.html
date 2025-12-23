@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Figmentia</title>
+    
+    <link rel="stylesheet" href="StyleAdmin.css">
+</head>
+<body>
+
+    <div id="header">
+        <div class="logo">Figmentia (Admin)</div>
+        <div class="user-info">👤 Fahmi Riquelme (Admin)</div> 
+    </div>
+
+    <div id="sidebar">
+        <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+        
+        <a href="AdminDashboard.html">🏠 Dashboard</a>
+        <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+        <a href="AdminFiturChat.html">💬 Chat</a>
+        <a href="AdminManajemenTransaksi.html" class="active">💳 Manajemen Transaksi</a>
+        <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+        <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+        <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+        <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+
+    </div>
+
+    <div id="main-content">
+        
+        <div id="manajemen-transaksi-view" class="card main-feature-card">
+            <h2>💳 Manajemen Transaksi & Laporan</h2>
+            
+            <div class="card sub-card transaction-management-card">
+                <h4>Riwayat Transaksi Selesai</h4>
+                <p>Data berikut mencakup semua pesanan yang statusnya sudah 'Lunas' dan 'Selesai'.</p>
+
+                <div class="order-table-container">
+                    <table class="data-table transaction-table">
+                        <thead>
+                            <tr>
+                                <th>ID Transaksi</th>
+                                <th>ID Pesanan</th>
+                                <th>Klien</th>
+                                <th>Layanan</th>
+                                <th>Jumlah Pembayaran</th>
+                                <th>Tanggal Lunas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TRX202501001</td>
+                                <td>FIG00128</td>
+                                <td>Budi Santoso</td>
+                                <td>UI/UX Website</td>
+                                <td>Rp 2.500.000</td>
+                                <td>2025-01-25</td>
+                            </tr>
+                            <tr>
+                                <td>TRX202501002</td>
+                                <td>FIG00127</td>
+                                <td>Ahmad F.</td>
+                                <td>Kartu Nama</td>
+                                <td>Rp 80.000</td>
+                                <td>2025-01-20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card sub-card report-management-card">
+                <h4>📈 Laporan Bulanan</h4>
+                <p>Pilih periode untuk menghasilkan ringkasan pendapatan dan transaksi.</p>
+                
+                <div class="report-controls">
+                    <label for="bulan">Pilih Bulan:</label>
+                    <select id="bulan" name="bulan">
+                        <option value="01">Januari</option>
+                        <option value="02">Februari</option>
+                    </select>
+                    
+                    <label for="tahun">Pilih Tahun:</label>
+                    <select id="tahun" name="tahun">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2024">2023</option>
+                        <option value="2024">2022</option>
+                    </select>
+                    
+                    <button class="btn-primary" onclick="generateReport()">Generate Laporan</button>
+                    <button class="btn-secondary" onclick="exportReport()">Export PDF/Excel</button>
+                </div>
+
+                <div id="report-summary" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                    <p>Total Transaksi Bulan Terpilih: <strong style="color: green;">Rp 24.580.000</strong></p>
+                    <p>Jumlah Pesanan Selesai: <strong>2</strong></p>
+                </div>
+            </div>
+        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+
+    <script>
+        // Fungsi JS Dasar (Perlu dikembangkan dengan Backend untuk fungsionalitas nyata)
+        function editOrder(orderId) { console.log("Membuka detail edit untuk: " + orderId); }
+        function openReviewModal(orderId) { console.log("Membuka Modal Review & Penentuan Tarif untuk: " + orderId); }
+        function updateStatus(orderId) { console.log("Membuka form untuk mengubah status layanan untuk: " + orderId); }
+        function validatePayment(orderId) { console.log("Memproses validasi bukti pembayaran."); }
+        
+        function generateReport() {
+            const bulan = document.getElementById('bulan').value;
+            const tahun = document.getElementById('tahun').value;
+            console.log(`Mencoba menghasilkan laporan untuk periode: ${bulan}/${tahun}.`);
+        }
+        function exportReport() { console.log("Mengunduh laporan dalam format PDF/Excel."); }
+
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            const chatLog = document.getElementById('chat-log');
+            if (message) {
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message admin';
+                newMessage.textContent = message;
+                chatLog.appendChild(newMessage);
+                input.value = '';
+                chatLog.scrollTop = chatLog.scrollHeight; 
+            }
+        }
+        function loadChat(orderId) { console.log("Memuat riwayat chat untuk pesanan: " + orderId); }
+    </script>
+</body>
+</html>

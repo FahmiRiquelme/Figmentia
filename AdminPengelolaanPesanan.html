@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Figmentia</title>
+    
+    <link rel="stylesheet" href="StyleAdmin.css">
+</head>
+<body>
+
+    <div id="header">
+        <div class="logo">Figmentia (Admin)</div>
+        <div class="user-info">👤 Fahmi Riquelme (Admin)</div> 
+    </div>
+
+    <div id="sidebar">
+        <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+        
+        <a href="AdminDashboard.html">🏠 Dashboard</a>
+        <a href="AdminPengelolaanPesanan.html" class="active">📥 Pengelolaan Pesanan</a>
+        <a href="AdminFiturChat.html">💬 Chat</a>
+        <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+        <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+        <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+        <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+        <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+    <div id="main-content">
+        <div id="pengelolaan-pesanan-view" class="card main-feature-card">
+            <h2>📥 Pengelolaan Pesanan</h2>
+            
+            <div class="card sub-card order-management-card">
+                <h4>Ringkasan & Aksi Cepat</h4>
+                
+                <div class="table-actions">
+                    <button class="action-icon-btn btn-review" onclick="openReviewModal('FIG00130')">
+                        <span class="icon">📝</span> Review & Tarif
+                    </button>
+                    <button class="action-icon-btn btn-update" onclick="updateStatus('FIG00130')">
+                        <span class="icon">🔄</span> Update Status
+                    </button>
+                    <button class="action-icon-btn btn-validate" onclick="validatePayment('FIG00129')">
+                        <span class="icon">💳</span> Validasi Bayar
+                    </button>
+                </div>
+
+                <div class="order-table-container">
+                    <table class="data-table order-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pesanan</th>
+                                <th>Klien</th>
+                                <th>Layanan</th>
+                                <th>Status Layanan</th>
+                                <th>Bukti Bayar</th>
+                                <th>Status Pembayaran</th>
+                                <th>Tarif Final</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="status-new">
+                                <td>FIG00130</td>
+                                <td>Rina Dewi</td>
+                                <td>Logo Premium</td>
+                                <td><span class="badge badge-warning">Menunggu Review</span></td>
+                                <td>N/A</td>
+                                <td><span class="badge badge-danger">Belum Bayar</span></td>
+                                <td>Rp 0</td>
+                                <td>
+                                    <button class="btn-primary btn-edit" onclick="editOrder('FIG00130')">Edit</button>
+                                </td>
+                            </tr>
+                            <tr class="status-pending-payment">
+                                <td>FIG00129</td>
+                                <td>Siti Aisyah</td>
+                                <td>Poster Promosi</td>
+                                <td><span class="badge badge-info">Menunggu Validasi</span></td>
+                                <td><a href="#" class="link-file">Lihat File</a></td>
+                                <td><span class="badge badge-info">Menunggu Validasi</span></td>
+                                <td>Rp 150.000</td>
+                                <td>
+                                    <button class="btn-primary btn-edit" onclick="editOrder('FIG00129')">Edit</button>
+                                </td>
+                            </tr>
+                            <tr class="status-processing">
+                                <td>FIG00128</td>
+                                <td>Budi Santoso</td>
+                                <td>UI/UX Website</td>
+                                <td><span class="badge badge-primary">Diproses (50%)</span></td>
+                                <td>Valid</td>
+                                <td><span class="badge badge-success">Lunas</span></td>
+                                <td>Rp 2.500.000</td>
+                                <td>
+                                    <button class="btn-primary btn-edit" onclick="editOrder('FIG00128')">Edit</button>
+                                </td>
+                            </tr>
+                            <tr class="status-complete">
+                                <td>FIG00127</td>
+                                <td>Ahmad F.</td>
+                                <td>Kartu Nama</td>
+                                <td><span class="badge badge-success">Selesai</span></td>
+                                <td>Valid</td>
+                                <td><span class="badge badge-success">Lunas</span></td>
+                                <td>Rp 80.000</td>
+                                <td>
+                                    <button class="btn-primary btn-edit" onclick="editOrder('FIG00127')">Arsipkan</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function editOrder(orderId) {
+            alert("Membuka halaman/modal edit dan detail untuk: " + orderId);
+        }
+        function openReviewModal(orderId) {
+            alert("Aksi: Review Pesanan & Penentuan Tarif. Pesanan: " + orderId);
+        }
+        function updateStatus(orderId) {
+            alert("Aksi: Membuka form untuk mengubah status layanan. Pesanan: " + orderId);
+        }
+        function validatePayment(orderId) {
+            alert("Aksi: Memproses validasi bukti pembayaran.");
+        }
+    </script>
+</body>
+</html>

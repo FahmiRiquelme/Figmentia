@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Akun Customer - Figmentia Admin</title>
+    <link rel="stylesheet" href="StyleAdmin.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="sidebar">
+    <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+
+    <a href="AdminDashboard.html">🏠 Dashboard</a>
+    <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+    <a href="AdminFiturChat.html">💬 Chat</a>
+    <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+    <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+    <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+    <a href="AdminManajemenAkunCustomer.html" class="active">👤 Manajemen Akun</a>
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header">
+    <div class="logo">Figmentia (Admin)</div>
+    <div class="user-info">👤 Fahmi Riquelme (Admin)</div>
+</div>
+
+<div id="main-content">
+    
+    <div id="manajemen-akun-view" class="card main-feature-card">
+        <h2>👤 Manajemen Akun Customer</h2>
+        <p style="color: #6c757d; margin-bottom: 20px;">Kelola dan pantau seluruh akun pengguna (Customer) yang terdaftar di Figmentia.</p>
+
+        <div class="card sub-card account-management-card">
+            <h4>Daftar Akun Customer</h4>
+            
+            <div class="table-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div class="search-control">
+                    <label for="search-input" style="font-weight: 600;">Cari Akun:</label>
+                    <input type="text" id="search-input" placeholder="Nama, Email, atau ID Customer" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 300px;">
+                </div>
+                <button class="btn-primary" onclick="tambahAkunBaru()">➕ Tambah Akun Manual</button>
+            </div>
+
+            <div class="order-table-container">
+                <table class="data-table order-table">
+                    <thead>
+                        <tr>
+                            <th>ID Customer</th>
+                            <th>Nama Lengkap</th>
+                            <th>Email</th>
+                            <th>Tgl Terdaftar</th>
+                            <th>Status Akun</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CUST0015</td>
+                            <td>Andi Pratama</td>
+                            <td>andi.p@example.com</td>
+                            <td>2025-10-01</td>
+                            <td><span class="badge badge-success">Aktif</span></td>
+                            <td>
+                                <button class="btn-edit btn-secondary" onclick="editAkun('CUST0015')">Edit</button>
+                                <button class="btn-delete btn-danger" onclick="hapusAkun('CUST0015')">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CUST0014</td>
+                            <td>Budi Santoso</td>
+                            <td>budi.s@mail.com</td>
+                            <td>2025-10-15</td>
+                            <td><span class="badge badge-success">Aktif</span></td>
+                            <td>
+                                <button class="btn-edit btn-secondary" onclick="editAkun('CUST0014')">Edit</button>
+                                <button class="btn-delete btn-danger" onclick="hapusAkun('CUST0014')">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CUST0013</td>
+                            <td>Citra Dewi</td>
+                            <td>citra.d@customer.id</td>
+                            <td>2025-11-01</td>
+                            <td><span class="badge badge-info">Belum Verifikasi</span></td>
+                            <td>
+                                <button class="btn-edit btn-secondary" onclick="editAkun('CUST0013')">Edit</button>
+                                <button class="btn-delete btn-danger" onclick="hapusAkun('CUST0013')">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CUST0012</td>
+                            <td>Rina Dewi</td>
+                            <td>rina@sample.net</td>
+                            <td>2025-11-20</td>
+                            <td><span class="badge badge-warning">Diblokir</span></td>
+                            <td>
+                                <button class="btn-edit btn-secondary" onclick="editAkun('CUST0012')">Aktifkan</button>
+                                <button class="btn-delete btn-danger" onclick="hapusAkun('CUST0012')">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="footer-note">... Menampilkan 25 dari total 120 Akun Customer ...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function editAkun(customerId) {
+        alert("Membuka modal/halaman detail akun untuk Edit: " + customerId);
+    }
+    
+    function hapusAkun(customerId) {
+        if (confirm("Apakah Anda yakin ingin menghapus akun " + customerId + "?")) {
+            alert("Akun " + customerId + " telah dihapus (Simulasi).");
+        }
+    }
+
+    function tambahAkunBaru() {
+        alert("Membuka form/modal untuk menambahkan akun customer secara manual.");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Konten - Figmentia</title>
+    <link rel="stylesheet" href="StyleAdmin.css">
+</head>
+<body>
+
+    <div id="header">
+        <div class="logo">Figmentia (Admin)</div>
+        <div class="user-info">👤 Fahmi Riquelme (Admin)</div>
+    </div>
+
+    <div id="sidebar">
+        <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png"> Figmentia</div>
+        
+        <a href="AdminDashboard.html">🏠 Dashboard</a>
+        <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+        <a href="AdminFiturChat.html">💬 Chat</a>
+        <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+        <a href="AdminManajemenKonten.html" class="active">🖼️ Manajemen Konten</a>
+        <a href="AdminLaporanBulanan.html">📈 Laporan Bulanan</a>
+        <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+        <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+    </div>
+
+    <div id="main-content">
+        <div id="manajemen-konten-view" class="card main-feature-card">
+            <h2>🖼️ Manajemen Konten</h2>
+            
+            <div class="card sub-card content-management-card">
+                <h4>Konten Galeri</h4>
+                <p>Kelola gambar, video, dan materi visual lainnya yang akan ditampilkan di situs.</p>
+
+                <div class="content-gallery">
+                    <table class="data-table content-table">
+                        <thead>
+                            <tr>
+                                <th>ID Konten</th>
+                                <th>Judul</th>
+                                <th>Tipe</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CT001</td>
+                                <td>Banner Promo Januari</td>
+                                <td>Gambar</td>
+                                <td>Aktif</td>
+                                <td><button class="btn-primary" onclick="editContent('CT001')">Edit</button> <button class="btn-secondary" onclick="deleteContent('CT001')">Hapus</button></td>
+                            </tr>
+                            <tr>
+                                <td>CT002</td>
+                                <td>Video/Product Demo</td>
+                                <td>Video</td>
+                                <td>Tidak Aktif</td>
+                                <td><button class="btn-primary" onclick="editContent('CT002')">Edit</button> <button class="btn-secondary" onclick="deleteContent('CT002')">Hapus</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card sub-card content-upload-card">
+                <h4>Upload Konten Baru</h4>
+                <form id="upload-content-form" onsubmit="uploadContent(event)">
+                    <label for="content-title">Judul Konten:</label><br>
+                    <input type="text" id="content-title" name="content-title" required><br><br>
+
+                    <label for="content-type">Tipe Konten:</label><br>
+                    <select id="content-type" name="content-type" required>
+                        <option value="gambar">Gambar</option>
+                        <option value="video">Video</option>
+                        <option value="dokumen">Dokumen</option>
+                    </select><br><br>
+
+                    <label for="content-file">Pilih File:</label><br>
+                    <input type="file" id="content-file" name="content-file" accept="image/*,video/*,.pdf,.doc,.docx" required><br><br>
+
+                    <button class="btn-primary" type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function editContent(contentId) {
+            console.log("Edit konten dengan ID: " + contentId);
+        }
+
+        function deleteContent(contentId) {
+            console.log("Hapus konten dengan ID: " + contentId);
+        }
+
+        function uploadContent(event) {
+            event.preventDefault();
+            const title = document.getElementById('content-title').value;
+            const type = document.getElementById('content-type').value;
+            const fileInput = document.getElementById('content-file');
+            const file = fileInput.files[0];
+            if (file) {
+                console.log("Mengupload konten baru:", title, type, file.name);
+                alert("Konten berhasil diupload (fungsi simulasi)");
+                // Reset form
+                event.target.reset();
+            }
+        }
+    </script>
+
+</body>
+</html>

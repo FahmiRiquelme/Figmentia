@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Bulanan - Figmentia Admin</title>
+    <link rel="stylesheet" href="StyleAdmin.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="sidebar">
+    <div class="sidebar-logo"><img class="sidebar-logo-img" src="Gambar/Logo2.png">
+        Figmentia</div>
+
+    <a href="AdminDashboard.html">🏠 Dashboard</a>
+    <a href="AdminPengelolaanPesanan.html">📥 Pengelolaan Pesanan</a>
+    <a href="AdminFiturChat.html">💬 Chat</a>
+    <a href="AdminManajemenTransaksi.html">💳 Manajemen Transaksi</a>
+    <a href="AdminManajemenKonten.html">🖼️ Manajemen Konten</a>
+    <a href="AdminLaporanBulanan.html" class="active">📈 Laporan Bulanan</a>
+    <a href="AdminManajemenAkunCustomer.html">👤 Manajemen Akun</a>
+    <a href="Halamlogin.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header">
+    <div class="logo">Figmentia (Admin)</div>
+    <div class="user-info">👤 Fahmi Riquelme (Admin)</div>
+</div>
+
+<div id="main-content">
+    
+    <div class="card">
+        <h4 style="color: #333; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">Pengaturan Laporan</h4>
+        
+        <div class="report-controls">
+            <label for="filter-bulan">Bulan:</label>
+            <select id="filter-bulan">
+                <option value="06" selected>Juni</option>
+                <option value="05">Mei</option>
+                <option value="04">April</option>
+            </select>
+
+            <label for="filter-tahun">Tahun:</label>
+            <select id="filter-tahun">
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+            </select>
+
+            <button class="btn-primary" id="btn-generate">Generate</button>
+            <button class="btn-secondary" id="btn-export">Export PDF</button>
+        </div>
+        
+        <div id="report-summary" style="padding-top: 15px; border-top: 1px solid #eee;">
+            <p>Total Pemasukan Bulan Terpilih (Juni 2025): <strong class="money-cell">Rp 27.500.000</strong></p>
+            <p>Jumlah Pesanan Selesai: <strong>45</strong></p>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h4 style="color: #333; margin-top: 0;">Visualisasi Data Pemasukan (Juni 2025)</h4>
+        <div style="background-color: #f9f9f9; border: 1px dashed #ddd; padding: 100px 20px; text-align: center; border-radius: 6px; color: #888;">
+            [Placeholder Grafik Garis/Batang Pemasukan Harian]
+        </div>
+    </div>
+
+    <div class="card">
+        <h4 style="color: #333; margin-top: 0;">Detail Transaksi (Juni 2025)</h4>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID Transaksi</th>
+                    <th>ID Pesanan</th>
+                    <th>Klien</th>
+                    <th>Layanan</th>
+                    <th>Jumlah</th>
+                    <th>Tgl Lunas</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TRX2506001</td>
+                    <td>FIG00130</td>
+                    <td>Andi Pratama</td>
+                    <td>Web Design Kustom</td>
+                    <td class="money-cell">Rp 8.500.000</td>
+                    <td>2025-06-05</td>
+                    <td><span class="badge badge-success">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>TRX2506002</td>
+                    <td>FIG00131</td>
+                    <td>Budi Santoso</td>
+                    <td>Template UI/UX App</td>
+                    <td class="money-cell">Rp 1.200.000</td>
+                    <td>2025-06-08</td>
+                    <td><span class="badge badge-success">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td>TRX2506003</td>
+                    <td>Citra Dewi</td>
+                    <td>Logo Design</td>
+                    <td class="money-cell">Rp 500.000</td>
+                    <td>2025-06-12</td>
+                    <td><span class="badge badge-success">Selesai</span></td>
+                </tr>
+                <tr>
+                    <td colspan="7" class="footer-note">... Laporan mencakup total 45 Pesanan Selesai ...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil elemen yang diperlukan
+        const btnGenerate = document.getElementById('btn-generate');
+        const btnExport = document.getElementById('btn-export');
+        const filterBulan = document.getElementById('filter-bulan');
+        const filterTahun = document.getElementById('filter-tahun');
+
+        // Logika untuk tombol Generate Laporan
+        btnGenerate.addEventListener('click', function() {
+            const bulan = filterBulan.options[filterBulan.selectedIndex].text;
+            const tahun = filterTahun.value;
+            alert('Laporan untuk bulan ' + bulan + ' tahun ' + tahun + ' sedang dimuat/digenerate.');
+        });
+
+        // Logika untuk tombol Export
+        btnExport.addEventListener('click', function() {
+            const bulan = filterBulan.options[filterBulan.selectedIndex].text;
+            const tahun = filterTahun.value;
+            alert('Mempersiapkan Laporan Bulanan (' + bulan + ' ' + tahun + ') untuk diexport.');
+        });
+    });
+</script>
+</body>
+</html>
