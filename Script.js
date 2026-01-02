@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (selectedRole === 'admin') {
                     // Jika peran yang dipilih adalah Admin
-                    redirectUrl = '../Admin/AdminDashboard.html'; // Ganti dengan URL dashboard admin Anda
+                    redirectUrl = 'AdminDashboard.html'; // Ganti dengan URL dashboard admin Anda
                     alert('Login sebagai Admin sedang diproses. Mengalihkan ke Dashboard Admin...');
                 } else if (selectedRole === 'customer') {
                     // Jika peran yang dipilih adalah Customer
-                    redirectUrl = '../Customer/HalamanDashboard.html'; // Ganti dengan URL dashboard customer Anda
+                    redirectUrl = 'HalamanDashboard.html'; // Ganti dengan URL dashboard customer Anda
                     alert('Login sebagai Customer sedang diproses. Mengalihkan ke Dashboard Customer...');
                 }
 
@@ -1133,4 +1133,5 @@ function downloadFile(orderId) {
              alert("❌ Kata sandi lama salah atau kosong. Mohon coba lagi.");
         }
     }
+
 
