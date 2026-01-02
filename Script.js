@@ -657,7 +657,7 @@ const orderHistory = [
 
     return `
     <div class="nota-header">
-    <img src="../Gambar/Logo2.png" alt="Figmentia Logo" style="width: 50px; margin-bottom: 10px;">
+    <img src="Gambar/Logo2.png" alt="Figmentia Logo" style="width: 50px; margin-bottom: 10px;">
     <h2>NOTA PEMBAYARAN - ${order.id}</h2>
     </div>
     
@@ -1133,3 +1133,4 @@ function downloadFile(orderId) {
              alert("❌ Kata sandi lama salah atau kosong. Mohon coba lagi.");
         }
     }
+
