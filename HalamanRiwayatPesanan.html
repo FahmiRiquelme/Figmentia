@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pesanan - Figmentia</title>
+    <link rel="stylesheet" href="../Css/StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="jam-container-internal">
+        <div id="jam-jalan">🕒 Memuat Waktu...</div>
+    </div>
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="../Gambar/Logo2.png" alt="Logo">
+        <span>Figmentia</span>
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html" class="active">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    <a href="index.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    <div class="greeting-banner">
+        <h1>📜 Riwayat Pesanan & Status Kustom</h1>
+        <p>Lihat semua riwayat transaksi dan pantau perkembangan pengajuan penawaran kustom Anda.</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content-main full-width">
+            <div class="card main-feature-card">
+                <h2>Daftar Pesanan Saya</h2>
+                <div class="table-responsive">
+                    <table class="data-table history-table">
+                        <thead>
+                            <tr>
+                                <th>ID Transaksi</th>
+                                <th>Tipe</th>
+                                <th>Nama Layanan</th>
+                                <th>Total Harga</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderHistoryBody">
+                            <tr>
+                                <td colspan="7" style="text-align:center;">Memuat data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="footer">
+                <p>&copy; CopyRight <b>Fahmi Riquelme</b> | NIM 251011700189 | 01SIFP003 - 2026</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="chatModal" class="modal chat-window" style="display:none;">
+    <div class="modal-content card chat-container">
+        <div class="chat-header">
+            <h4><i class="fas fa-headset"></i> Layanan Bantuan Figmentia</h4>
+            <span class="close-button" onclick="window.closeChatModal()">&times;</span>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ketik pesan..." class="form-control" onkeypress="window.handleChatEnter(event)">
+            <button class="btn-primary" onclick="window.sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<div id="invoiceModal" class="modal invoice-window" style="display:none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+    <div class="modal-content card invoice-container" style="background: white; margin: 5% auto; padding: 20px; width: 80%; max-width: 600px; border-radius: 8px;">
+        <div class="invoice-header" style="text-align: right;">
+            <span class="close-button" onclick="window.closeInvoiceModal()" style="cursor:pointer; font-size: 24px;">&times;</span>
+        </div>
+        
+        <div id="invoiceTemplate">
+            </div>
+        
+        <div class="invoice-actions" style="margin-top: 20px; text-align: center;">
+            <button class="btn-primary" id="btn-download-pdf" onclick="window.downloadInvoice()">
+                <i class="fas fa-file-pdf"></i> Unduh PDF Sekarang
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="../JS/Script.js"></script>
+</body>
+</html>

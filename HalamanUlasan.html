@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umpan Balik - Figmentia</title>
+    <link rel="stylesheet" href="../Css/StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="jam-container-internal">
+        <div id="jam-jalan">🕒 Memuat Waktu...</div>
+    </div>
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="../Gambar/Logo2.png">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html" class="active">⭐ Umpan Balik</a>
+    
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    
+    <a href="index.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    
+    <div class="greeting-banner">
+        <h1>⭐ Berikan Umpan Balik Anda</h1>
+        <p>Bantu kami meningkatkan kualitas layanan dengan memberikan rating dan ulasan jujur untuk pesanan Anda.</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content-main full-width">
+            <div class="card main-feature-card">
+                <h2>Formulir Ulasan Layanan</h2>
+                
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    
+                    <div class="form-group">
+                        <label for="orderId">Pilih Pesanan yang Akan Diulas:</label>
+                        <select id="orderId" name="orderId" required class="form-control">
+                            <option value="">-- Pilih ID Pesanan Selesai --</option>
+                            </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Penilaian Kualitas Layanan:</label>
+                        <div class="rating-area">
+                            <div class="rating-stars" id="ratingStars">
+                                </div>
+                            <input type="hidden" id="ratingValue" name="ratingValue" required value="0">
+                            <div class="rating-label" id="ratingLabel">Pilih rating Anda (0 Bintang)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackText">Komentar dan Saran (Maks. 500 karakter):</label>
+                        <textarea id="feedbackText" name="feedbackText" rows="5" maxlength="500" placeholder="Berikan komentar mendetail mengenai pengalaman Anda (kualitas desain, kecepatan respon, dll)." required class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="padding: 12px 25px; margin-top: 20px;">
+                        <i class="fas fa-paper-plane"></i> Kirim Umpan Balik
+                    </button>
+                    
+                </form>
+                <div id="footer">
+                        <p>&copy; CopyRight <b>Fahmi Riquelme</b> | NIM 251011700189 | 01SIFP003 - 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../JS/Script.js"></script>
+</body>
+</html>

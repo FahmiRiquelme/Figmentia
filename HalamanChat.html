@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Admin - Figmentia</title>
+    
+    <link rel="stylesheet" href="../Css/StyleHalaman.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Tambahan CSS inline untuk memastikan layout WhatsApp-style bekerja maksimal */
+        #chatMessages {
+            display: flex;
+            flex-direction: column;
+            background-color: #e5ddd5; /* Warna background khas WhatsApp */
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); /* Wallpaper WA */
+            background-repeat: repeat;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        .chat-sidebar {
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+        }
+        .conversation-list .active {
+            background-color: #ebebeb !important;
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar-customer">
+    <div class="jam-container-internal">
+        <div id="jam-jalan">🕒 Memuat Waktu...</div>
+    </div>
+    <div class="sidebar-logo">
+        <img class="sidebar-logo-img" src="../Gambar/Logo2.png" alt="Logo">
+        Figmentia
+    </div>
+    
+    <a href="HalamanDashboard.html">🏠 Dashboard Utama</a> 
+    <a href="HalamanPortofolio.html">🌟 Portofolio</a>
+    <a href="HalamanKatalog&Layanan.html">✨ Katalog & Layanan</a>
+    <a href="HalamanRiwayatPesanan.html">📜 Riwayat Pesanan</a>
+    <a href="HalamanChat.html" class="active">💬 Chat Admin</a>
+    <a href="HalamanUlasan.html">⭐ Umpan Balik</a>
+    <a href="HalamanProfile.html" class="profile-link">👤 Lihat Profil</a>
+    <a href="index.html" class="logout-link">🚪 Logout</a>
+</div>
+
+<div id="header-customer">
+    <div class="logo-customer">Figmentia (Customer)</div>
+    <div class="user-info-customer">
+        <i class="fas fa-user-circle"></i>
+        <span>Fahmi Riquelmi</span>
+    </div>
+</div>
+
+<div id="main-content">
+    <div class="greeting-banner">
+        <h1>💬 Layanan Bantuan Figmentia</h1>
+        <p>Berinteraksi langsung dengan Admin Figmentia sesuai kebutuhan.</p>
+    </div>
+
+    <div class="card main-feature-card">
+        <div class="chat-layout" style="display: flex; height: 550px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            
+            <div class="chat-sidebar" style="width: 30%;">
+                <div class="chat-sidebar-header" style="padding: 15px; background: #075e54; color: white; font-weight: 600;">
+                    Daftar Percakapan
+                </div>
+                <div class="conversation-list" id="conversationList">
+                    </div>
+            </div>
+            
+            <div class="chat-main" style="width: 70%; display: flex; flex-direction: column;">
+                <div class="chat-main-header" id="chatHeader" style="padding: 10px 20px; border-bottom: 1px solid #ddd; background: #ededed;">
+                    Pilih Admin...
+                </div>
+                
+                <div class="chat-messages-container" id="chatMessages">
+                    <div style="text-align: center; color: #888; padding-top: 50px; background: white; height: 100%;">
+                        Silakan pilih Admin untuk memulai percakapan.
+                    </div>
+                </div>
+                
+                <div class="chat-input-area" style="padding: 15px; background: #f0f0f0; display: flex; align-items: center; gap: 10px;">
+                    <textarea placeholder="Ketik pesan Anda di sini..." id="customerChatInput" disabled 
+                              style="flex: 1; border-radius: 20px; padding: 10px 15px; border: 1px solid #fff; resize: none; outline: none;"></textarea>
+                    
+                    <button class="btn-primary" id="sendBtn" onclick="window.sendMessage()" disabled 
+                            style="width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #075e54; border: none; color: white;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>&copy; CopyRight <b>Fahmi Riquelme</b> | NIM 251011700189 | 01SIFP003 - 2026</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="../JS/Script.js"></script>
+
+</body>
+</html>
